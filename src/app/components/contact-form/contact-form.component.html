@@ -1,0 +1,53 @@
+<div class="background flex flex-col items-center">
+  <h3 class="text-2xl text-center text-white pb-4 pt-20">
+    <b>Neem contact op!</b>
+  </h3>
+  <ng-form class="mx-4 forms">
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        class="p-2 rounded-md w-full"
+        placeholder="Naam"
+        name="naam"
+        [(ngModel)]="naam"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        class="p-2 rounded-md w-full"
+        placeholder="Emailadres"
+        name="email"
+        [(ngModel)]="email"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <input
+        matInput
+        class="p-2 rounded-md w-full"
+        placeholder="Telefoonnummer"
+        name="telefoonNummer"
+        [(ngModel)]="telefoonNummer"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field class="w-full h-44">
+      <textarea
+        matInput
+        class="p-2 rounded w-full h-44"
+        placeholder="Vragen"
+        [(ngModel)]="bericht"
+        name="vragen"
+        required
+      ></textarea>
+    </mat-form-field>
+    <div
+      routerLink="/"
+      class="flex flex-col items-center bg-blue-900 text-white rounded w-36 p-3 hover:shadow-lg cursor-pointer place-self-center"
+    >
+      <a class="text-white place-self-center text-center">Verzenden</a>
+    </div>
+  </ng-form>
+</div>

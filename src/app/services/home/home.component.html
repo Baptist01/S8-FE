@@ -1,0 +1,99 @@
+<!--main page-->
+<section class="relative">
+  <div
+    class="flex flex-col md:flex-row align-center justify-between mx-auto pt-28"
+  >
+    <div class="relative">
+      <img
+        ngSrc="../../../assets/main%20groepsfoto.jpg"
+        alt="group foto"
+        class="sm:w-auto h-full"
+        height="632"
+        width="842"
+        priority
+      />
+    </div>
+    <div class="flex flex-col items-center place-self-center">
+      <h1 class="text-5xl font-semibold my-4 mx-3 text-center">
+        Welkom bij Now or Never Sports
+      </h1>
+      <p class="text-lg text-gray-500 mx-6 text-center my-4">
+        Bij ons kun je terecht voor personal training en professional personal
+        training. Wij helpen je graag om je doelen te bereiken.
+      </p>
+      <app-contact-button
+        class="xl:mb-10 lg:mb-32 md:mb-32 sm:mb-32 max-sm:mb-32"
+      ></app-contact-button>
+    </div>
+  </div>
+  <div class="triangle bg-zinc-900"></div>
+</section>
+
+<!--Sport overview-->
+<section>
+  <div
+    class="bg-zinc-900 py-16 px-8 grid grid-cols-1 gap-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 align-center justify-between"
+  >
+    <div class="text-gray-200 flex flex-col items-center">
+      <mat-icon>assignment</mat-icon>
+      <h2 class="text-2xl font-bold text-center mb-3">Personal training</h2>
+      <ul class="flex flex-col items-center text-lg">
+        <li>Privé training</li>
+        <li class="text-center">Small group Functional training</li>
+      </ul>
+    </div>
+    <div class="text-gray-200 flex flex-col items-center">
+      <mat-icon>group</mat-icon>
+      <h2 class="text-2xl font-bold mb-3">Boxing</h2>
+      <ul class="flex flex-col items-center text-lg">
+        <li>Privé training</li>
+        <li>Duo training</li>
+        <li>Ladies only group</li>
+        <li>Guys only group</li>
+        <li>Mix group</li>
+        <li>Kids</li>
+      </ul>
+    </div>
+    <div class="text-gray-200 flex flex-col items-center">
+      <mat-icon>fitness_center</mat-icon>
+      <h2 class="text-2xl font-bold mb-3">Bootcamp</h2>
+      <ul class="flex flex-col items-center text-lg">
+        <li>Outdoor</li>
+        <li>Indoor</li>
+      </ul>
+    </div>
+    <div class="text-gray-200 flex flex-col items-center">
+      <mat-icon>directions_run</mat-icon>
+      <h2 class="text-2xl font-bold mb-3">Running</h2>
+      <ul class="flex flex-col items-center text-lg">
+        <li>Coaching</li>
+        <li>Outdoor group</li>
+      </ul>
+    </div>
+    <div class="text-gray-200 flex flex-col items-center leading-normal">
+      <mat-icon>verified_user</mat-icon>
+      <h2 class="text-2xl font-bold mb-3">Professional</h2>
+      <ul class="flex flex-col items-center text-lg">
+        <li>Physical</li>
+        <li>Mentale coaching</li>
+        <li class="text-center">Sport specifieke training</li>
+        <li class="text-center">Small group professional training</li>
+        <li class="text-center">Herstel/revalidatie training</li>
+        <li>Sport massage</li>
+      </ul>
+    </div>
+    <div class="text-gray-200 flex flex-col items-center">
+      <mat-icon>filter_9_plus</mat-icon>
+      <h2 class="text-2xl font-bold mb-3">Clinics</h2>
+      <ul class="flex flex-col items-center text-lg">
+        <li>Scholen</li>
+        <li>Bedrijven</li>
+        <li>Sportverenigingen</li>
+      </ul>
+    </div>
+  </div>
+  <div class="triangle-2 bg-zinc-900"></div>
+</section>
+
+<!--Contact form-->
+<app-contact-form></app-contact-form>

@@ -1,0 +1,93 @@
+<header class="fixed w-full bg-white h-28 shadow-md z-50">
+  <nav>
+    <div
+      class="flex flex-wrap items-center justify-between max-w-screen-xl px-5 mx-auto"
+    >
+      <a href="/" class="flex items-center">
+        <img
+          ngSrc="../assets/NoworNeverSports-Logo-Blauw-logo-real.png"
+          alt="NoNs logo"
+          height="110"
+          width="100"
+          priority
+        />
+      </a>
+      <button class="lg:hidden" (click)="toggleMenu()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div
+        [ngClass]="{
+          'lg:flex items-center justify-between w-full lg:w-auto lf-order-1': true,
+          hidden: !isMenuOpen,
+        }"
+      >
+        <ul
+          class="flex flex-col lg:flex-row lg:space-x-8 font-medium bg-white rounded"
+        >
+          <li class="">
+            <a
+              href="/"
+              class="text-black hover:bg-gray-100 rounded block px-3 py-2"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="/personal-training"
+              class="text-black hover:bg-gray-100 rounded block px-3 py-2"
+              >Personal training</a
+            >
+          </li>
+          <li>
+            <a
+              href="/professional-personal-training"
+              class="text-black hover:bg-gray-100 rounded block px-3 py-2"
+              >Professional personal training</a
+            >
+          </li>
+          <li>
+            <a
+              href="/over-ons"
+              class="text-black hover:bg-gray-100 rounded block px-3 py-2"
+              >Over ons</a
+            >
+          </li>
+          <li>
+            <a
+              href="/contact"
+              class="text-black hover:bg-gray-100 rounded block px-3 py-2"
+              >Contact</a
+            >
+          </li>
+          <li *ngIf="isLoggedIn">
+            <a
+              href="/profile"
+              class="text-black hover:bg-gray-100 rounded block px-3 py-2"
+              >Profile</a
+            >
+          </li>
+          <li>
+            <a
+              *ngIf="isLoggedIn"
+              (click)="logout()"
+              class="text-black hover:bg-gray-100 rounded block px-3 py-2 cursor-pointer"
+              >logout</a
+            >
+            <a
+              *ngIf="!isLoggedIn"
+              (click)="login()"
+              class="text-black hover:bg-gray-100 rounded block px-3 py-2 cursor-pointer"
+              >login</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<router-outlet></router-outlet>
+
+<footer class="footer">
+  <a> Now or Never Sports &copy; 2025 </a>
+</footer>

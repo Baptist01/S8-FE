@@ -1,0 +1,26 @@
+.background {
+  background-image: url('../../../assets/contact-background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: calc(100vh - 36px - 7rem);
+  min-height: 600px;
+}
+
+textarea {
+  resize: vertical;
+  height: 180px;
+}
+
+.forms {
+  max-width: 450px;
+}
+
+mat-form-field {
+  margin-top: -30px;
+}
+
+textarea.mat-input-element {
+  height: 176px;
+}

@@ -1,0 +1,23 @@
+<div class="pt-28">
+  <div class="background">
+    <h1 class="text-5xl font-semibold text-center text-white pt-28">
+      Over ons
+    </h1>
+    <h3 class="text-2xl text-center text-gray-500 pt-2">
+      Haal alles uit jezelf – Sport met passie!
+    </h3>
+  </div>
+  <div class="background-mid">
+    <h2
+      class="text-3xl font-semibold text-center pt-20 text-white font-serif px-3 pb-16"
+    >
+      Ons ervaren team zorgt ervoor dat je jezelf comfortabel en thuis voelt.
+    </h2>
+  </div>
+  <div class="trainers-container">
+    <app-trainer-info-card
+      *ngFor="let trainer of trainers"
+      [trainer]="trainer"
+    ></app-trainer-info-card>
+  </div>
+</div>
