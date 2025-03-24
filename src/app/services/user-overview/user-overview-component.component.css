@@ -1,0 +1,26 @@
+table {
+  border-collapse: collapse;
+  width: 94%;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.email-column {
+  display: table-cell;
+}
+
+@media (max-width: 500px) {
+  .email-column {
+      display: none;
+  }
+}

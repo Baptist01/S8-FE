@@ -1,0 +1,19 @@
+<section class="pt-32">
+    <span class="mb-16 mx-16">
+        <h1 class="text-5xl font-semibold my-4 mx-3 text-center">Users</h1>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th class="email-column">email</th>
+                <th>telefoonnummer</th>
+            </tr>
+            <tr *ngFor="let user of users" (click)="goToUserDetails(user.id)" style="cursor: pointer;">
+                <td>{{ user.firstName }} {{ user.middleName }} {{ user.lastName}}</td>
+                <td class="email-column">{{ user.email }}</td>
+                <td>{{ user.phoneNumber }}</td>
+            </tr>
+        </table>
+    </span>
+</section>
+
+  

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +11,7 @@ import { ProfessionalPersonalTrainingComponent } from './services/professional-p
 import { ContactComponent } from './services/contact/contact.component';
 import { NgOptimizedImage } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -24,6 +26,8 @@ import { environment } from '../enviroment/enviroment';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
 import { TrainerInfoCardComponent } from './components/trainer-info-card/trainer-info-card.component';
 import { FusionAuthModule } from '@fusionauth/angular-sdk';
+import { provideHttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -37,6 +41,8 @@ import { FusionAuthModule } from '@fusionauth/angular-sdk';
     HomeComponent,
   ],
   imports: [
+    CommonModule,
+    MatPaginator,
     MatMenuModule,
     MatSidenavModule,
     MatToolbarModule,
@@ -44,6 +50,7 @@ import { FusionAuthModule } from '@fusionauth/angular-sdk';
     MatListModule,
     BrowserModule,
     AppRoutingModule,
+    RouterModule,
     NgOptimizedImage,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -62,7 +69,9 @@ import { FusionAuthModule } from '@fusionauth/angular-sdk';
       shouldAutoRefresh: true,
     }),
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(),
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

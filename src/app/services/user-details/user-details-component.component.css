@@ -1,0 +1,40 @@
+.user-details-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh; 
+}
+
+.user-details {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    min-width: 350px;
+}
+
+.user-details p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 10px 0;
+}
+
+.user-details p strong {
+    color: #333;
+    font-weight: 600;
+}
+
+.user-details p:nth-child(odd) {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.user-details p:nth-child(even) {
+    padding: 10px;
+    border-radius: 4px;
+}

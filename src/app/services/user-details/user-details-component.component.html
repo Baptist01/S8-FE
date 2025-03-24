@@ -1,0 +1,30 @@
+<section class="pt-28">
+    <span class="mb-16 mx-16">
+        <h1 class="text-5xl font-semibold my-4 mx-3 text-center">{{ user.firstName }} {{ user.lastName }}</h1>
+    </span>
+</section>
+
+<div class="user-details-container">
+    <div class="user-details">
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Phone Number:</strong> {{ user.phoneNumber }}</p>
+        <p><strong>Birth Date:</strong> {{ user.birthDate }}</p>
+        <p><strong>Work:</strong> {{ user.work }}</p>
+        <p><strong>Work Activities:</strong> {{ user.workActivities }}</p>
+        <p><strong>Smoking:</strong> {{ user.smoking }}</p>
+        <p><strong>Drinking:</strong> {{ user.drinking }}</p>
+        <!-- <p><strong>Adres:</strong> {{ user.adresses.country}} {{ user.adresses.city}} {{ user.adresses.postalCode }} {{ user.adresses.street}} {{ user.adresses.number }}</p> -->
+        <div *ngIf="user.children && user.children.length">
+            <h2 class="text-3xl font-semibold my-4">Children</h2>
+            <ul>
+                <li *ngFor="let child of user.children">
+                    <p><strong>Name:</strong> {{ child.name }}</p>
+                    <p><strong>Birth Date:</strong> {{ child.birthDate }}</p>
+                </li>
+            </ul>
+        </div>
+        <div *ngIf="user.children && user.children.length === 0">
+            <p><strong>Add Children</strong></p>
+        </div>
+    </div>
+</div>
