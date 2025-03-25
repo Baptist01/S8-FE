@@ -1,0 +1,47 @@
+<div class="user-details-container pt-28">
+    <div class="user-details">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <div>
+                <label for="firstName"><strong>First Name:</strong></label>
+                <input id="firstName" formControlName="firstName" type="text">
+            </div>
+            <div>
+                <label for="middleName"><strong>Middle Name:</strong></label>
+                <input id="middleName" formControlName="middleName" type="text">
+            </div>
+            <div>
+                <label for="lastName"><strong>Last Name:</strong></label>
+                <input id="lastName" formControlName="lastName" type="text">
+            </div>
+            <div>
+                <label for="email"><strong>Email:</strong></label>
+                <input id="email" formControlName="email" type="email">
+            </div>
+            <div>
+                <label for="phoneNumber"><strong>Phone Number:</strong></label>
+                <input id="phoneNumber" formControlName="phoneNumber" type="text">
+            </div>
+            <div>
+                <label for="birthDate"><strong>Birth Date:</strong></label>
+                <input id="birthDate" formControlName="birthDate" type="date">
+            </div>
+            <div>
+                <label for="work"><strong>Work:</strong></label>
+                <input id="work" formControlName="work" type="text">
+            </div>
+            <div>
+                <label for="workActivities"><strong>Work Activities:</strong></label>
+                <input id="workActivities" formControlName="workActivities" type="text">
+            </div>
+            <div>
+                <label for="smoking"><strong>Smoking:</strong></label>
+                <input id="smoking" formControlName="smoking" type="text">
+            </div>
+            <div>
+                <label for="drinking"><strong>Drinking:</strong></label>
+                <input id="drinking" formControlName="drinking" type="text">
+            </div>
+            <button type="submit">Add User</button>
+        </form>
+    </div>
+</div>

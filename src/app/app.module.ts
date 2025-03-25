@@ -11,7 +11,7 @@ import { ProfessionalPersonalTrainingComponent } from './services/professional-p
 import { ContactComponent } from './services/contact/contact.component';
 import { NgOptimizedImage } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -42,7 +42,7 @@ import { CommonModule } from '@angular/common';
   ],
   imports: [
     CommonModule,
-    MatPaginator,
+    MatPaginatorModule,
     MatMenuModule,
     MatSidenavModule,
     MatToolbarModule,

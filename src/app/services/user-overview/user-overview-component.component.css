@@ -24,3 +24,13 @@ tr:nth-child(even) {
       display: none;
   }
 }
+
+.add-button {
+  margin: 20px;
+  padding: 10px;
+  background-color: #ea2929;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

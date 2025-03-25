@@ -9,6 +9,7 @@ import { ProfileComponent } from './services/profile/profile.component';
 import { UserOverviewComponent } from './services/user-overview/user-overview-component.component';
 import { UserDetailsComponent } from './services/user-details/user-details-component.component';
 import { authGuard } from './auth-guard';
+import { UserCreateComponent } from './services/user-create/user-create.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard(true, '/')] },
   { path: 'users', component: UserOverviewComponent },
   { path: 'users/:id', component: UserDetailsComponent },
+  { path: 'user/create', component: UserCreateComponent}
 ];
 
 @NgModule({

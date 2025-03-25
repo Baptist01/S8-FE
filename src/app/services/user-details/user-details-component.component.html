@@ -13,18 +13,268 @@
         <p><strong>Work Activities:</strong> {{ user.workActivities }}</p>
         <p><strong>Smoking:</strong> {{ user.smoking }}</p>
         <p><strong>Drinking:</strong> {{ user.drinking }}</p>
-        <!-- <p><strong>Adres:</strong> {{ user.adresses.country}} {{ user.adresses.city}} {{ user.adresses.postalCode }} {{ user.adresses.street}} {{ user.adresses.number }}</p> -->
+        <hr>
+
+        <h2 class="text-2xl font-semibold my-4">Children</h2>
+        <div>
+            <button (click)="showAddChildForm = !showAddChildForm" class="btn btn-primary"><strong>Add Child</strong></button>
+        </div>
+        <div *ngIf="showAddChildForm">
+            <form [formGroup]="childForm" (ngSubmit)="onAddChild()">
+                <div>
+                    <label for="childName"><strong>Name:</strong></label>
+                    <input id="childName" formControlName="name" type="text">
+                </div>
+                <div>
+                    <label for="childBirthDate"><strong>Birth Date:</strong></label>
+                    <input id="childBirthDate" formControlName="birthDate" type="date">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
         <div *ngIf="user.children && user.children.length">
-            <h2 class="text-3xl font-semibold my-4">Children</h2>
             <ul>
                 <li *ngFor="let child of user.children">
                     <p><strong>Name:</strong> {{ child.name }}</p>
                     <p><strong>Birth Date:</strong> {{ child.birthDate }}</p>
+                    <hr>
                 </li>
             </ul>
         </div>
-        <div *ngIf="user.children && user.children.length === 0">
-            <p><strong>Add Children</strong></p>
+
+        <h2 class="text-2xl font-semibold my-4">Working hours</h2>
+        <div>
+            <button (click)="showAddWorkingHoursForm = !showAddWorkingHoursForm" class="btn btn-primary"><strong>Add Working Hours</strong></button>
+        </div>
+        <div *ngIf="showAddWorkingHoursForm">
+            <form [formGroup]="workingHoursForm" (ngSubmit)="onAddWorkingHours()">
+                <div>
+                    <label for="dayOfWeek"><strong>Day of the week:</strong></label>
+                    <input id="dayOfWeek" formControlName="dayOfWeek" type="number">
+                </div>
+                <div>
+                    <label for="start"><strong>Start Time:</strong></label>
+                    <input id="start" formControlName="start" type="time">
+                </div>
+                <div>
+                    <label for="end"><strong>End Time:</strong></label>
+                    <input id="end" formControlName="end" type="time" step="1800">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div>
+            <ul>
+                <li *ngFor="let slot of user.workingHours">
+                    <p><strong>dag van de week:</strong> {{ slot.dayOfWeek }}</p>
+                    <p><strong>start time:</strong> {{ slot.start }}</p>
+                    <p><strong>end time:</strong> {{ slot.end }}</p>
+                    <hr>
+                </li>
+            </ul>
+        </div>
+        
+        <span>
+        <h2 class="text-2xl font-semibold my-4">Medicine</h2>
+        <div>
+            <button (click)="showAddMedicineForm = !showAddMedicineForm" class="btn btn-primary"><strong>Add Medicine</strong></button>
+        </div>
+        <div *ngIf="showAddMedicineForm">
+            <form [formGroup]="medicineForm" (ngSubmit)="onAddMedicine()">
+                <div>
+                    <label for="medicineName"><strong>Name:</strong></label>
+                    <input id="medicineName" formControlName="name" type="text">
+                </div>
+                <div>
+                    <label for="medicineDescription"><strong>Description:</strong></label>
+                    <input id="medicineDescription" formControlName="description" type="text">
+                </div>
+                <div>
+                    <label for="medicineFrequency"><strong>Frequency:</strong></label>
+                    <input id="medicineFrequency" formControlName="frequency" type="text">
+                </div>
+                <div>
+                    <label for="medicineStartDate"><strong>Start Date:</strong></label>
+                    <input id="medicineStartDate" formControlName="startDate" type="date">
+                </div>
+                <div>
+                    <label for="medicineEndDate"><strong>End Date:</strong></label>
+                    <input id="medicineEndDate" formControlName="endDate" type="date">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div *ngIf="user.medicin && user.medicin.length">
+            <ul>
+                <li *ngFor="let med of user.medicin">
+                    <p><strong>Name:</strong> {{ med.name }}</p>
+                    <p><strong>Description:</strong> {{ med.description }}</p>
+                    <p><strong>Frequency:</strong> {{ med.frequency }}</p>
+                    <p><strong>Start Date:</strong> {{ med.startDate }}</p>
+                    <p><strong>End Date:</strong> {{ med.endDate }}</p>
+                    <hr>
+                </li>
+            </ul>
+        </div>
+        </span>
+
+        <h2 class="text-2xl font-semibold my-4">Evaluations</h2>
+        <div>
+            <button (click)="showAddEvaluationForm = !showAddEvaluationForm" class="btn btn-primary"><strong>Add Evaluation</strong></button>
+        </div>
+        <div *ngIf="showAddEvaluationForm">
+            <form [formGroup]="evaluationForm" (ngSubmit)="onAddEvaluation()">
+                <div>
+                    <label for="evaluationDate"><strong>Date:</strong></label>
+                    <input id="evaluationDate" formControlName="date" type="date">
+                </div>
+                <div>
+                    <label for="evaluationProgress"><strong>Progress:</strong></label>
+                    <input id="evaluationProgress" formControlName="progress" type="text">
+                </div>
+                <div>
+                    <label for="evaluationDescription"><strong>Description:</strong></label>
+                    <input id="evaluationDescription" formControlName="description" type="text">
+                </div>
+                <div>
+                    <label for="evaluationPayment"><strong>Payment:</strong></label>
+                    <input id="evaluationPayment" formControlName="payment" type="text">
+                </div>
+                <div>
+                    <label for="evaluationComment"><strong>Comment:</strong></label>
+                    <input id="evaluationComment" formControlName="comment" type="text">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div *ngIf="user.evaluations && user.evaluations.length">
+            <ul>
+                <li *ngFor="let eval of user.evaluations">
+                    <p><strong>Date:</strong> {{ eval.date }}</p>
+                    <p><strong>Progress:</strong> {{ eval.progress }}</p>
+                    <p><strong>Description:</strong> {{ eval.description }}</p>
+                    <p><strong>Payment:</strong> {{ eval.payment }}</p>
+                    <p><strong>Comment:</strong> {{ eval.comment }}</p>
+                    <hr>
+                </li>
+            </ul>
+        </div>
+
+        <h2 class="text-2xl font-semibold my-4">Notes</h2>
+        <div>
+            <button (click)="showAddNoteForm = !showAddNoteForm" class="btn btn-primary"><strong>Add Note</strong></button>
+        </div>
+        <div *ngIf="showAddNoteForm">
+            <form [formGroup]="noteForm" (ngSubmit)="onAddNote()">
+                <div>
+                    <label for="noteTitle"><strong>Title:</strong></label>
+                    <input id="noteTitle" formControlName="title" type="text">
+                </div>
+                <div>
+                    <label for="noteContent"><strong>Content:</strong></label>
+                    <textarea id="noteContent" formControlName="content"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div *ngIf="user.notes && user.notes.length">
+            <ul>
+                <li *ngFor="let note of user.notes">
+                    <p><strong>Title:</strong> {{ note.title }}</p>
+                    <p><strong>Content:</strong> {{ note.content }}</p>
+                    <hr>
+                </li>
+            </ul>
+        </div>
+
+        <h2 class="text-2xl font-semibold my-4">Vacations</h2>
+        <div>
+            <button (click)="showAddVacationForm = !showAddVacationForm" class="btn btn-primary"><strong>Add Vacation</strong></button>
+        </div>
+        <div *ngIf="showAddVacationForm">
+            <form [formGroup]="vacationForm" (ngSubmit)="onAddVacation()">
+                <div>
+                    <label for="vacationStartDate"><strong>Start Date:</strong></label>
+                    <input id="vacationStartDate" formControlName="startDate" type="date">
+                </div>
+                <div>
+                    <label for="vacationEndDate"><strong>End Date:</strong></label>
+                    <input id="vacationEndDate" formControlName="endDate" type="date">
+                </div>
+                <div>
+                    <label for="vacationDescription"><strong>Description:</strong></label>
+                    <input id="vacationDescription" formControlName="description" type="text">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div *ngIf="user.vacations && user.vacations.length">
+            <ul>
+                <li *ngFor="let vacation of user.vacations">
+                    <p><strong>Start Date:</strong> {{ vacation.startDate }}</p>
+                    <p><strong>End Date:</strong> {{ vacation.endDate }}</p>
+                    <p><strong>Description:</strong> {{ vacation.description }}</p>
+                    <hr>
+                </li>
+            </ul>
+        </div>
+
+        <h2 class="text-2xl font-semibold my-4">Memberships</h2>
+        <div>
+            <button (click)="showAddMembershipForm = !showAddMembershipForm" class="btn btn-primary"><strong>Add Membership</strong></button>
+        </div>
+        <div *ngIf="showAddMembershipForm">
+            <form [formGroup]="membershipForm" (ngSubmit)="onAddMembership()">
+                <div>
+                    <label for="membershipIsCurrent"><strong>Is Current:</strong></label>
+                    <input id="membershipIsCurrent" formControlName="isCurrent" type="checkbox">
+                </div>
+                <div>
+                    <label for="membershipFee"><strong>Fee:</strong></label>
+                    <input id="membershipFee" formControlName="fee" type="number">
+                </div>
+                <div>
+                    <label for="membershipTrainingTypeId"><strong>Training Type ID:</strong></label>
+                    <input id="membershipTrainingTypeId" formControlName="trainingTypeId" type="number">
+                </div>
+                <div>
+                    <label for="membershipFrequencyId"><strong>Frequency ID:</strong></label>
+                    <input id="membershipFrequencyId" formControlName="frequencyId" type="number">
+                </div>
+                <div>
+                    <label for="membershipStartDate"><strong>Start Date:</strong></label>
+                    <input id="membershipStartDate" formControlName="startDate" type="date">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div *ngIf="user.memberships && user.memberships.length">
+            <ul>
+                <li *ngFor="let membership of user.memberships">
+                    <p><strong>Is Current:</strong> {{ membership.isCurrent }}</p>
+                    <p><strong>Fee:</strong> {{ membership.fee }}</p>
+                    <p><strong>Training Type ID:</strong> {{ membership.trainingTypeId }}</p>
+                    <p><strong>Frequency ID:</strong> {{ membership.frequencyId }}</p>
+                    <p><strong>Start Date:</strong> {{ membership.startDate }}</p>
+                    <hr>
+                </li>
+            </ul>
+        </div>
+
+        <h2 class="text-2xl font-semibold my-4">Physical Issues</h2>
+        <div>
+            <p><strong>Add Physical Issue</strong></p>
+        </div>
+        <div *ngIf="user.phisicalIssues && user.phisicalIssues.length">
+            <ul>
+                <li *ngFor="let issue of user.phisicalIssues">
+                    <p><strong>Name:</strong> {{ issue.name }}</p>
+                    <p><strong>Description:</strong> {{ issue.description }}</p>
+                    <p><strong>Start Date:</strong> {{ issue.startDate }}</p>
+                    <p><strong>End Date:</strong> {{ issue.endDate }}</p>
+                    <hr>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
