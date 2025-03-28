@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { environment } from 'src/enviroment/enviroment';
 
 @Component({
   selector: 'app-user-create',
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './user-create.component.html',
   styleUrl: './user-create.component.css'
@@ -13,8 +15,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 
 export class UserCreateComponent implements OnInit {
   userForm: FormGroup;
-
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
     this.userForm = this.fb.group({
       firstName: ['', Validators.required],
       middleName: [''],
@@ -33,7 +34,7 @@ export class UserCreateComponent implements OnInit {
 
   onSubmit(): void {
     if (this.userForm.valid) {
-      this.http.post('http://localhost:5003/api/users', this.userForm.value)
+      this.http.post(environment.api.url + '/users', this.userForm.value)
         .subscribe(response => {
           console.log('User added successfully', response);
           // Handle successful response
@@ -42,5 +43,7 @@ export class UserCreateComponent implements OnInit {
           // Handle error response
         });
     }
+
+    this.router.navigate(['/users']);
   }
 }

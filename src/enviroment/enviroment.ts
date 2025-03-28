@@ -8,4 +8,7 @@ export const environment = {
     postLogoutRedirectUri: 'http://localhost:4200',
     scope: 'openid email profile offline_access',
   },
+  api: {
+    url: 'https://localhost:7219/api',
+  },
 };

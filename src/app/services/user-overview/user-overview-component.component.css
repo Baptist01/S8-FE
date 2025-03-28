@@ -26,11 +26,12 @@ tr:nth-child(even) {
 }
 
 .add-button {
-  margin: 20px;
+  margin: 20px 3%;
   padding: 10px;
   background-color: #ea2929;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  max-width: 100px;
 }

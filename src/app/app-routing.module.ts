@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'personal-training', component: PersonalTrainingComponent },
   { path: 'professional-personal-training', component: ProfessionalPersonalTrainingComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [authGuard(true, '/')] },
+  { path: 'profile', component: ProfileComponent },
   { path: 'users', component: UserOverviewComponent },
   { path: 'users/:id', component: UserDetailsComponent },
   { path: 'user/create', component: UserCreateComponent}

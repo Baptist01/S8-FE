@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { Router } from '@angular/router';
+import { environment } from 'src/enviroment/enviroment';
 
 
 @Component({
@@ -23,10 +24,12 @@ export class UserOverviewComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router) {}
   ngOnInit(): void {
-    this.http.get<any[]>('http://localhost:5003/api/users')
+    this.http.get<any[]>(environment.api.url + '/users')
       .subscribe(data => {
         this.users = data;
       });
+
+      console.log(environment.api.url + '/users');
   }
 
   goToUserDetails(userId: string): void {
