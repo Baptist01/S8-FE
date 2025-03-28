@@ -1,21 +1,38 @@
 <section class="pt-32">
-    <span class="mb-16 mx-16">
+    <span class="mb-32 mx-16">
         <h1 class="text-5xl font-semibold my-4 mx-3 text-center">Users</h1>
         <div class="add-button">
             <a href="/user/create" class="btn btn-primary">Add User</a>
         </div>
+        <div class="mb-4">
+            <input
+                type="text"
+                placeholder="Search by name"
+                [(ngModel)]="searchQuery"
+                (input)="onSearch()"
+                class="border border-gray-300 rounded px-4 py-2 mx-12"
+            />
+        </div>
+        <div *ngIf="paginatedUsers.length">
         <table>
             <tr>
                 <th>Name</th>
                 <th class="email-column">email</th>
                 <th>telefoonnummer</th>
             </tr>
-            <tr *ngFor="let user of users" (click)="goToUserDetails(user.id)" style="cursor: pointer;">
+            <tr *ngFor="let user of paginatedUsers" (click)="goToUserDetails(user.id)" style="cursor: pointer;">
                 <td>{{ user.firstName }} {{ user.middleName }} {{ user.lastName}}</td>
                 <td class="email-column">{{ user.email }}</td>
                 <td>{{ user.phoneNumber }}</td>
             </tr>
         </table>
+        </div>
+        <mat-paginator
+            [length]="filteredUsers.length"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[10, 20, 30]"
+            (page)="onPageChange($event)">
+        </mat-paginator>
     </span>
 </section>
 
