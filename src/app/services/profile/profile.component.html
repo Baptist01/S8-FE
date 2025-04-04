@@ -6,6 +6,9 @@
 
 <div class="user-details-container">
   <div class="user-details">
+    <p><strong>Firstname:</strong> {{ user.firstName }}</p>
+    <p><strong>Middlenames:</strong> {{ user.middleName }}</p>
+    <p><strong>Lastname:</strong> {{ user.lastName }}</p>
       <p><strong>Email:</strong> {{ user.email }}</p>
       <p><strong>Phone Number:</strong> {{ user.phoneNumber }}</p>
       <p><strong>Birth Date:</strong> {{ user.birthDate }}</p>
@@ -54,18 +57,6 @@
         </ul>
     </div>
 
-    <h2 class="text-xl font-semibold my-4">Working hours</h2>
-    <div>
-      <ul>
-          <li *ngFor="let slot of user.workingHours">
-              <p><strong>dag van de week:</strong> {{ getDayOfWeek(slot.dayOfWeek) }}</p>
-              <p><strong>start time:</strong> {{ slot.start }}</p>
-              <p><strong>end time:</strong> {{ slot.end }}</p>
-              <hr>
-          </li>
-      </ul>
-    </div>
-
     <h2 class="text-xl font-semibold my-4">Medicine</h2>
     <div *ngIf="user.medicin && user.medicin.length">
       <ul>
@@ -79,7 +70,7 @@
           </li>
       </ul>
     </div>
-    <h2 class="text-2xl font-semibold my-4">Physical Issues</h2>
+    <h2 class="text-xl font-semibold my-4">Physical Issues</h2>
     <div *ngIf="user.phisicalIssues && user.phisicalIssues.length">
       <ul>
           <li *ngFor="let issue of user.phisicalIssues">

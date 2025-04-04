@@ -6,13 +6,134 @@
 
 <div class="user-details-container">
     <div class="user-details">
-        <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>Phone Number:</strong> {{ user.phoneNumber }}</p>
-        <p><strong>Birth Date:</strong> {{ user.birthDate }}</p>
-        <p><strong>Work:</strong> {{ user.work }}</p>
-        <p><strong>Work Activities:</strong> {{ user.workActivities }}</p>
-        <p><strong>Smoking:</strong> {{ user.smoking }}</p>
-        <p><strong>Drinking:</strong> {{ user.drinking }}</p>
+        <h2 class="text-2xl font-semibold my-4">Details</h2>
+        <div *ngIf="editingUserIndex !== 0">
+            <p><strong>Firstname:</strong> {{ user.firstName }}</p>
+            <p><strong>Middlenames:</strong> {{ user.middleName }}</p>
+            <p><strong>Lastname:</strong> {{ user.lastName }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Phone Number:</strong> {{ user.phoneNumber }}</p>
+            <p><strong>Birth Date:</strong> {{ user.birthDate }}</p>
+            <p><strong>Work:</strong> {{ user.work }}</p>
+            <p><strong>Work Activities:</strong> {{ user.workActivities }}</p>
+            <p><strong>Smoking:</strong> {{ user.smoking }}</p>
+            <p><strong>Drinking:</strong> {{ user.drinking }}</p>
+            <button (click)="onEditUser()" class="btn btn-secondary edit-btn">Edit</button>
+        </div>
+        <div *ngIf="editingUserIndex === 0">
+            <form [formGroup]="userForm" (ngSubmit)="onUpdateUser()">            
+                <div>
+                    <label for="firstName"><strong>First Name:</strong></label>
+                    <input
+                        id="firstName"
+                        formControlName="firstName"
+                        type="text"
+                        placeholder="Enter first name"
+                        class="border border-gray-300 rounded px-4 py-2 w-full"
+                    />
+                </div>
+                <div>
+                    <label for="middleName"><strong>Middle Name:</strong></label>
+                    <input
+                        id="middleName"
+                        formControlName="middleName"
+                        type="text"
+                        placeholder="Enter middle name"
+                        class="border border-gray-300 rounded px-4 py-2 w-full"
+                    />
+                </div>
+                <div>
+                    <label for="lastName"><strong>Last Name:</strong></label>
+                    <input
+                        id="lastName"
+                        formControlName="lastName"
+                        type="text"
+                        placeholder="Enter last name"
+                        class="border border-gray-300 rounded px-4 py-2 w-full"
+                    />
+                </div>
+            
+                <div>
+                    <label for="email"><strong>Email:</strong></label>
+                    <input
+                        id="email"
+                        formControlName="email"
+                        type="email"
+                        placeholder="Enter email"
+                        class="border border-gray-300 rounded px-4 py-2 w-full"
+                    />
+                </div>
+            
+                <div>
+                    <label for="phoneNumber"><strong>Phone Number:</strong></label>
+                    <input
+                        id="phoneNumber"
+                        formControlName="phoneNumber"
+                        type="text"
+                        placeholder="Enter phone number"
+                        class="border border-gray-300 rounded px-4 py-2 w-full"
+                    />
+                </div>
+            
+                <div>
+                    <label for="birthDate"><strong>Birth Date:</strong></label>
+                    <input
+                        id="birthDate"
+                        formControlName="birthDate"
+                        type="date"
+                        class="border border-gray-300 rounded px-4 py-2 w-full"
+                    />
+                </div>
+            
+                <div>
+                    <label for="work"><strong>Work:</strong></label>
+                    <input
+                        id="work"
+                        formControlName="work"
+                        type="text"
+                        placeholder="Enter work details"
+                        class="border border-gray-300 rounded px-4 py-2 w-full"
+                    />
+                </div>
+            
+                <div>
+                    <label for="workActivity"><strong>Work Activity:</strong></label>
+                    <input
+                        id="workActivity"
+                        formControlName="workActivity"
+                        type="text"
+                        placeholder="Enter work activity"
+                        class="border border-gray-300 rounded px-4 py-2 w-full"
+                    />
+                </div>
+            
+                <div>
+                    <label for="smoking"><strong>Smoking:</strong></label>
+                    <input
+                        id="smoking"
+                        formControlName="smoking"
+                        type="text"
+                        placeholder="Smoking habits"
+                        class="border border-gray-300 rounded px-4 py-2 w-full"
+                    />
+                </div>
+            
+                <div>
+                    <label for="drinking"><strong>Drinking:</strong></label>
+                    <input
+                        id="drinking"
+                        formControlName="drinking"
+                        type="text"
+                        placeholder="Drinking habits"
+                        class="border border-gray-300 rounded px-4 py-2 w-full"
+                    />
+                </div>
+            
+                <button type="submit" class="btn btn-primary save-btn">Save Changes</button>
+                <button type="button" (click)="onCancelEditUser()" class="btn btn-secondary cancel-btn">Cancel</button>
+            </form>
+        </div>
+
         <hr>
 
         <h2 class="text-2xl font-semibold my-4">Addresses</h2>
@@ -373,10 +494,6 @@
                             <div>
                                 <label for="content"><strong>Content:</strong></label>
                                 <textarea id="content" formControlName="content"></textarea>
-                            </div>
-                            <div>
-                                <label for="date"><strong>Date:</strong></label>
-                                <input id="date" formControlName="date" type="date">
                             </div>
                             <button type="submit" class="btn btn-primary save-btn">Save Changes</button>
                             <button type="button" (click)="cancelEditNote()" class="btn btn-secondary cancel-btn">Cancel</button>

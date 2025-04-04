@@ -45,6 +45,7 @@ export class UserDetailsComponent implements OnInit {
   membershipForm: FormGroup;
   physicalIssueForm: FormGroup;
   addressForm: FormGroup;
+  userForm: FormGroup;
 
   editingAddressIndex: number | null = null;
   editingChildIndex: number | null = null;
@@ -55,12 +56,27 @@ export class UserDetailsComponent implements OnInit {
   editingVacationIndex: number | null = null;
   editingMembershipIndex: number | null = null;
   editingPhysicalIssueIndex: number | null = null;
+  editingUserIndex: number | null = null;
 
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private http: HttpClient) {
+    this.userForm = this.fb.group({
+      id: [''],
+      firstName: ['', Validators.required],
+      middleName: [''],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phoneNumber: ['', Validators.required],
+      birthDate: ['', Validators.required],
+      work: [''],
+      workActivity: [''],
+      smoking: [''],
+      drinking: [''],
+    });
+
     this.childForm = this.fb.group({
       userId: [''],
       name: ['', Validators.required],
-      birthDate: ['', Validators.required]
+      birthDate: ['']
     });
 
     this.workingHoursForm = this.fb.group({
@@ -73,19 +89,19 @@ export class UserDetailsComponent implements OnInit {
     this.medicineForm = this.fb.group({
       userId: [''],
       name: ['', Validators.required],
-      description: ['', Validators.required],
+      description: [''],
       frequency: ['', Validators.required],
       startDate: ['', Validators.required],
-      endDate: ['', Validators.required]
+      endDate: ['']
     });
 
     this.evaluationForm = this.fb.group({
       userId: [''],
       date: ['', Validators.required],
       progress: ['', Validators.required],
-      description: ['', Validators.required],
+      description: [''],
       payment: ['', Validators.required],
-      comment: ['', Validators.required]
+      comment: ['']
     });
 
     this.noteForm = this.fb.group({
@@ -98,24 +114,24 @@ export class UserDetailsComponent implements OnInit {
       userId: [''],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['']
     });
 
     this.membershipForm = this.fb.group({
       userId: [''],
       isCurrent: [false],
       fee: ['', Validators.required],
-      trainingTypeId: ['', Validators.required],
-      frequencyId: ['', Validators.required],
+      trainingTypeId: [''],
+      frequencyId: [''],
       startDate: ['', Validators.required]
     });
 
     this.physicalIssueForm = this.fb.group({
       userId: [''],
       name: ['', Validators.required],
-      description: ['', Validators.required],
+      description: [''],
       startDate: ['', Validators.required],
-      endDate: ['', Validators.required]
+      endDate: ['']
     });
 
     this.addressForm = this.fb.group({
@@ -244,6 +260,32 @@ export class UserDetailsComponent implements OnInit {
     this.http.delete(environment.api.url + '/users/' + this.id).subscribe();
 
     this.router.navigate(['/users']);
+  }
+
+  onEditUser(): void {
+    this.editingUserIndex = 0;
+    this.userForm.patchValue(this.user);
+  }
+
+  onUpdateUser(): void {
+    if (this.userForm.valid && this.editingUserIndex !== null) {
+      const updatedUser = this.userForm.value;
+
+      this.http.put(environment.api.url + `/users/${this.id}`, updatedUser).subscribe(() => {
+        // Update the local user object
+        if (this.editingUserIndex !== null) {
+          this.user[this.editingUserIndex] = updatedUser;
+        }
+        this.editingUserIndex = null; // Exit editing mode
+        this.userForm.reset();
+        this.user = updatedUser;
+      });
+    }
+  }
+
+  onCancelEditUser(): void {
+    this.editingUserIndex = null;
+    this.userForm.reset();
   }
 
   onEditAddress(index: number): void {

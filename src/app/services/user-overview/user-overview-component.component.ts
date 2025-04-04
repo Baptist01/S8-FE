@@ -7,6 +7,7 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { environment } from 'src/enviroment/enviroment';
 import { FormsModule } from '@angular/forms';
+import { MatIcon } from '@angular/material/icon';
 
 
 @Component({
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     MatTableModule,
     MatPaginatorModule,
-    FormsModule
+    FormsModule,
+    MatIcon
   ],
   templateUrl: './user-overview-component.component.html',
   styleUrl: './user-overview-component.component.css',

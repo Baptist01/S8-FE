@@ -35,3 +35,11 @@ tr:nth-child(even) {
   cursor: pointer;
   max-width: 100px;
 }
+
+.completeProfileTrue {
+  color: #4CAF50; 
+}
+
+.completeProfileFalse {
+  color: #f44336;
+}
