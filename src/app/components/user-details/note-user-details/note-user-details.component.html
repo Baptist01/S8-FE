@@ -1,1 +1,71 @@
-<p>note-user-details works!</p>
+<h2 class="text-2xl font-semibold my-4">Notes</h2>
+<div>
+  <button
+    (click)="showAddNoteForm = !showAddNoteForm"
+    class="btn btn-primary add-btn"
+  >
+    <strong>Add Note</strong>
+  </button>
+</div>
+<div *ngIf="showAddNoteForm">
+  <form [formGroup]="noteForm" (ngSubmit)="onAddNote()">
+    <div>
+      <label for="noteTitle"><strong>Title:</strong></label>
+      <input id="noteTitle" formControlName="title" type="text" />
+    </div>
+    <div>
+      <label for="noteContent"><strong>Content:</strong></label>
+      <textarea id="noteContent" formControlName="content"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary save-btn">Submit</button>
+  </form>
+</div>
+<div *ngIf="notes && notes.length">
+  <ul>
+    <li *ngFor="let note of notes; let i = index">
+      <!-- Show text if not editing this note -->
+      <div *ngIf="editingNoteIndex !== i">
+        <p><strong>Title:</strong> {{ note.title }}</p>
+        <p><strong>Content:</strong> {{ note.content }}</p>
+        <p>
+          <strong>Last update:</strong>
+          {{ note.lastUpdate | date: 'yyyy-MM-dd' }}
+        </p>
+        <button (click)="onEditNote(i)" class="btn btn-secondary edit-btn">
+          Edit
+        </button>
+      </div>
+
+      <!-- Show the edit form if editing this note -->
+      <div *ngIf="editingNoteIndex === i">
+        <form [formGroup]="noteForm" (ngSubmit)="onUpdateNote()">
+          <div>
+            <label for="title"><strong>Title:</strong></label>
+            <input id="title" formControlName="title" type="text" />
+          </div>
+          <div>
+            <label for="content"><strong>Content:</strong></label>
+            <textarea id="content" formControlName="content"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary save-btn">
+            Save Changes
+          </button>
+          <button
+            type="button"
+            (click)="cancelEditNote()"
+            class="btn btn-secondary cancel-btn"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            (click)="onDeleteNote(i)"
+            class="btn btn-secondary cancel-btn"
+          >
+            Delete
+          </button>
+        </form>
+      </div>
+    </li>
+  </ul>
+</div>

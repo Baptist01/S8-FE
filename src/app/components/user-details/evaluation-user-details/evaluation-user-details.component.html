@@ -1,1 +1,100 @@
-<p>evaluation-user-details works!</p>
+<h2 class="text-2xl font-semibold my-4">Evaluations</h2>
+<div>
+  <button
+    (click)="showAddEvaluationForm = !showAddEvaluationForm"
+    class="btn btn-primary add-btn"
+  >
+    <strong>Add Evaluation</strong>
+  </button>
+</div>
+<div *ngIf="showAddEvaluationForm">
+  <form [formGroup]="evaluationForm" (ngSubmit)="onAddEvaluation()">
+    <div>
+      <label for="evaluationDate"><strong>Date:</strong></label>
+      <input id="evaluationDate" formControlName="date" type="date" />
+    </div>
+    <div>
+      <label for="evaluationProgress"><strong>Progress:</strong></label>
+      <input id="evaluationProgress" formControlName="progress" type="text" />
+    </div>
+    <div>
+      <label for="evaluationDescription"><strong>Description:</strong></label>
+      <input
+        id="evaluationDescription"
+        formControlName="description"
+        type="text"
+      />
+    </div>
+    <div>
+      <label for="evaluationPayment"><strong>Payment:</strong></label>
+      <input id="evaluationPayment" formControlName="payment" type="text" />
+    </div>
+    <div>
+      <label for="evaluationComment"><strong>Comment:</strong></label>
+      <input id="evaluationComment" formControlName="comment" type="text" />
+    </div>
+    <button type="submit" class="btn btn-primary save-btn">Submit</button>
+  </form>
+</div>
+<div *ngIf="evaluations && evaluations.length">
+  <ul>
+    <li *ngFor="let evaluation of evaluations; let i = index">
+      <!-- Show text if not editing this evaluation -->
+      <div *ngIf="editingEvaluationIndex !== i">
+        <p><strong>Date:</strong> {{ evaluation.date }}</p>
+        <p><strong>Progress:</strong> {{ evaluation.progress }}</p>
+        <p><strong>Description:</strong> {{ evaluation.description }}</p>
+        <p><strong>Payment:</strong> {{ evaluation.payment }}</p>
+        <p><strong>Comment:</strong> {{ evaluation.comment }}</p>
+        <button
+          (click)="onEditEvaluation(i)"
+          class="btn btn-secondary edit-btn"
+        >
+          Edit
+        </button>
+      </div>
+
+      <div *ngIf="editingEvaluationIndex === i">
+        <form [formGroup]="evaluationForm" (ngSubmit)="onUpdateEvaluation()">
+          <div>
+            <label for="date"><strong>Date:</strong></label>
+            <input id="date" formControlName="date" type="date" />
+          </div>
+          <div>
+            <label for="progress"><strong>Progress:</strong></label>
+            <input id="progress" formControlName="progress" type="text" />
+          </div>
+          <div>
+            <label for="description"><strong>Description:</strong></label>
+            <input id="description" formControlName="description" type="text" />
+          </div>
+          <div>
+            <label for="payment"><strong>Payment:</strong></label>
+            <input id="payment" formControlName="payment" type="text" />
+          </div>
+          <div>
+            <label for="comment"><strong>Comment:</strong></label>
+            <input id="comment" formControlName="comment" type="text" />
+          </div>
+          <button type="submit" class="btn btn-primary save-btn">
+            Save Changes
+          </button>
+          <button
+            type="button"
+            (click)="cancelEditEvaluation()"
+            class="btn btn-secondary cancel-btn"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            (click)="onDeleteEvaluation(i)"
+            class="btn btn-secondary cancel-btn"
+          >
+            Delete
+          </button>
+        </form>
+      </div>
+    </li>
+  </ul>
+</div>

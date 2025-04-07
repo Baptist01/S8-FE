@@ -1,704 +1,79 @@
 <section class="pt-28">
-    <span class="mb-16 mx-16">
-        <h1 class="text-5xl font-semibold my-4 mx-3 text-center">{{ user.firstName }} {{ user.lastName }}</h1>
-    </span>
+  <span class="mb-16 mx-16">
+    <h1 class="text-5xl font-semibold my-4 mx-3 text-center">
+      {{ user.firstName }} {{ user.lastName }}
+    </h1>
+  </span>
 </section>
 
 <div class="user-details-container">
-    <div class="user-details">
-        <h2 class="text-2xl font-semibold my-4">Details</h2>
-        <div *ngIf="editingUserIndex !== 0">
-            <p><strong>Firstname:</strong> {{ user.firstName }}</p>
-            <p><strong>Middlenames:</strong> {{ user.middleName }}</p>
-            <p><strong>Lastname:</strong> {{ user.lastName }}</p>
-            <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>Phone Number:</strong> {{ user.phoneNumber }}</p>
-            <p><strong>Birth Date:</strong> {{ user.birthDate }}</p>
-            <p><strong>Work:</strong> {{ user.work }}</p>
-            <p><strong>Work Activities:</strong> {{ user.workActivities }}</p>
-            <p><strong>Smoking:</strong> {{ user.smoking }}</p>
-            <p><strong>Drinking:</strong> {{ user.drinking }}</p>
-            <button (click)="onEditUser()" class="btn btn-secondary edit-btn">Edit</button>
-        </div>
-        <div *ngIf="editingUserIndex === 0">
-            <form [formGroup]="userForm" (ngSubmit)="onUpdateUser()">            
-                <div>
-                    <label for="firstName"><strong>First Name:</strong></label>
-                    <input
-                        id="firstName"
-                        formControlName="firstName"
-                        type="text"
-                        placeholder="Enter first name"
-                        class="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
-                <div>
-                    <label for="middleName"><strong>Middle Name:</strong></label>
-                    <input
-                        id="middleName"
-                        formControlName="middleName"
-                        type="text"
-                        placeholder="Enter middle name"
-                        class="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
-                <div>
-                    <label for="lastName"><strong>Last Name:</strong></label>
-                    <input
-                        id="lastName"
-                        formControlName="lastName"
-                        type="text"
-                        placeholder="Enter last name"
-                        class="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
-            
-                <div>
-                    <label for="email"><strong>Email:</strong></label>
-                    <input
-                        id="email"
-                        formControlName="email"
-                        type="email"
-                        placeholder="Enter email"
-                        class="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
-            
-                <div>
-                    <label for="phoneNumber"><strong>Phone Number:</strong></label>
-                    <input
-                        id="phoneNumber"
-                        formControlName="phoneNumber"
-                        type="text"
-                        placeholder="Enter phone number"
-                        class="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
-            
-                <div>
-                    <label for="birthDate"><strong>Birth Date:</strong></label>
-                    <input
-                        id="birthDate"
-                        formControlName="birthDate"
-                        type="date"
-                        class="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
-            
-                <div>
-                    <label for="work"><strong>Work:</strong></label>
-                    <input
-                        id="work"
-                        formControlName="work"
-                        type="text"
-                        placeholder="Enter work details"
-                        class="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
-            
-                <div>
-                    <label for="workActivity"><strong>Work Activity:</strong></label>
-                    <input
-                        id="workActivity"
-                        formControlName="workActivity"
-                        type="text"
-                        placeholder="Enter work activity"
-                        class="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
-            
-                <div>
-                    <label for="smoking"><strong>Smoking:</strong></label>
-                    <input
-                        id="smoking"
-                        formControlName="smoking"
-                        type="text"
-                        placeholder="Smoking habits"
-                        class="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
-            
-                <div>
-                    <label for="drinking"><strong>Drinking:</strong></label>
-                    <input
-                        id="drinking"
-                        formControlName="drinking"
-                        type="text"
-                        placeholder="Drinking habits"
-                        class="border border-gray-300 rounded px-4 py-2 w-full"
-                    />
-                </div>
-            
-                <button type="submit" class="btn btn-primary save-btn">Save Changes</button>
-                <button type="button" (click)="onCancelEditUser()" class="btn btn-secondary cancel-btn">Cancel</button>
-            </form>
-        </div>
+  <div class="user-details">
+    <app-base-user-details
+      [user]="user"
+      (userUpdated)="user = $event"
+    ></app-base-user-details>
 
-        <hr>
+    <hr />
 
-        <h2 class="text-2xl font-semibold my-4">Addresses</h2>
-        <div>
-            <button (click)="showAddAddressForm = !showAddAddressForm" class="btn btn-primary add-btn"><strong>Add Address</strong></button>
-        </div>
-        <div *ngIf="showAddAddressForm">
-            <form [formGroup]="addressForm" (ngSubmit)="onAddAddress()">
-                <div>
-                    <label for="street"><strong>Street:</strong></label>
-                    <input id="street" formControlName="street" type="text">
-                </div>
-                <div>
-                    <label for="number"><strong>Number:</strong></label>
-                    <input id="number" formControlName="number" type="text">
-                </div>
-                <div>
-                    <label for="city"><strong>City:</strong></label>
-                    <input id="city" formControlName="city" type="text">
-                </div>
-                <div>
-                    <label for="postalCode"><strong>Postal Code:</strong></label>
-                    <input id="postalCode" formControlName="postalCode" type="text">
-                </div>
-                <div>
-                    <label for="country"><strong>Country:</strong></label>
-                    <input id="country" formControlName="country" type="text">
-                </div>
-                <button type="submit" class="btn btn-primary save-btn">Submit</button>
-            </form>
-        </div>
-        <div *ngIf="user.adresses && user.adresses.length">
-            <ul>
-                <li *ngFor="let address of user.adresses; let i = index">
-                    <div *ngIf="editingAddressIndex !== i">
-                        <p><strong>Street:</strong> {{ address.street }}</p>
-                        <p><strong>Number:</strong> {{ address.number }}</p>
-                        <p><strong>City:</strong> {{ address.city }}</p>
-                        <p><strong>Postal Code:</strong> {{ address.postalCode }}</p>
-                        <p><strong>Country:</strong> {{ address.country }}</p>
-                        <button (click)="onEditAddress(i)" class="btn btn-secondary edit-btn">Edit</button>
-                    </div>
-                    <div *ngIf="editingAddressIndex === i">
-                        <form [formGroup]="addressForm" (ngSubmit)="onUpdateAddress()">
-                            <div>
-                                <label for="street"><strong>Street:</strong></label>
-                                <input id="street" formControlName="street" type="text">
-                            </div>
-                            <div>
-                                <label for="number"><strong>Number:</strong></label>
-                                <input id="number" formControlName="number" type="text">
-                            </div>
-                            <div>
-                                <label for="city"><strong>City:</strong></label>
-                                <input id="city" formControlName="city" type="text">
-                            </div>
-                            <div>
-                                <label for="postalCode"><strong>Postal Code:</strong></label>
-                                <input id="postalCode" formControlName="postalCode" type="text">
-                            </div>
-                            <div>
-                                <label for="country"><strong>Country:</strong></label>
-                                <input id="country" formControlName="country" type="text">
-                            </div>
-                            <button type="submit" class="btn btn-primary save-btn">Save Changes</button>
-                            <button type="button" (click)="cancelEdit()" class="btn btn-secondary cancel-btn">Cancel</button>
-                            <button type="button" (click)="onDeleteAddress(i)" class="btn btn-secondary cancel-btn">Delete</button>
-                        </form>
-                    </div>
-                    
-                    <hr>
-                </li>
-            </ul>
-        </div>
+    <app-adres-user-details
+      [userId]="user.id"
+      [adresses]="user.adresses"
+      (addressesUpdated)="user.adresses = $event"
+    >
+    </app-adres-user-details>
 
-        <h2 class="text-2xl font-semibold my-4">Children</h2>
-        <div>
-            <button (click)="showAddChildForm = !showAddChildForm" class="btn btn-primary add-btn"><strong>Add Child</strong></button>
-        </div>
-        <div *ngIf="showAddChildForm">
-            <form [formGroup]="childForm" (ngSubmit)="onAddChild()">
-                <div>
-                    <label for="childName"><strong>Name:</strong></label>
-                    <input id="childName" formControlName="name" type="text">
-                </div>
-                <div>
-                    <label for="childBirthDate"><strong>Birth Date:</strong></label>
-                    <input id="childBirthDate" formControlName="birthDate" type="date">
-                </div>
-                <button type="submit" class="btn btn-primary save-btn">Submit</button>
-            </form>
-        </div>
-        <div *ngIf="user.children && user.children.length">
-            <ul>
-                <li *ngFor="let child of user.children; let i = index">
-                    <div *ngIf="editingChildIndex !== i">
-                        <p><strong>Name:</strong> {{ child.name }}</p>
-                        <p><strong>Birth Date:</strong> {{ child.birthDate }}</p>
-                        <button (click)="onEditChild(i)" class="btn btn-secondary edit-btn">Edit</button>
-                    </div>
-                    <div *ngIf="editingChildIndex === i">
-                        <form [formGroup]="childForm" (ngSubmit)="onUpdateChild()">
-                            <div>
-                                <label for="name"><strong>Name:</strong></label>
-                                <input id="name" formControlName="name" type="text">
-                            </div>
-                            <div>
-                                <label for="birthDate"><strong>Birth Date:</strong></label>
-                                <input id="birthDate" formControlName="birthDate" type="date">
-                            </div>
-                            <button type="submit" class="btn btn-primary save-btn">Save Changes</button>
-                            <button type="button" (click)="cancelEditChild()" class="btn btn-secondary cancel-btn">Cancel</button>
-                            <button type="button" (click)="onDeleteChild(i)" class="btn btn-secondary cancel-btn">Delete</button>
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </div>
+    <app-children-user-details
+      [userId]="user.id"
+      [children]="user.children"
+      (childrenUpdated)="user.children = $event"
+    ></app-children-user-details>
 
-        <h2 class="text-2xl font-semibold my-4">Working hours</h2>
-        <div>
-            <button (click)="showAddWorkingHoursForm = !showAddWorkingHoursForm" class="btn btn-primary add-btn"><strong>Add Working Hours</strong></button>
-        </div>
-        <div *ngIf="showAddWorkingHoursForm">
-            <form [formGroup]="workingHoursForm" (ngSubmit)="onAddWorkingHours()">
-                <div>
-                    <label for="dayOfWeek"><strong>Day of the week:</strong></label>
-                    <input id="dayOfWeek" formControlName="dayOfWeek" type="number">
-                </div>
-                <div>
-                    <label for="start"><strong>Start Time:</strong></label>
-                    <input id="start" formControlName="start" type="time">
-                </div>
-                <div>
-                    <label for="end"><strong>End Time:</strong></label>
-                    <input id="end" formControlName="end" type="time" step="1800">
-                </div>
-                <button type="submit" class="btn btn-primary save-btn">Submit</button>
-            </form>
-        </div>
-        <div>
-            <ul>
-                <li *ngFor="let workingHour of user.workingHours; let i = index">
-                    <!-- Show text if not editing this working hour -->
-                    <div *ngIf="editingWorkingHoursIndex !== i">
-                        <p><strong>Day of Week:</strong> {{ getDayOfWeek(workingHour.dayOfWeek) }}</p>
-                        <p><strong>Start:</strong> {{ workingHour.start }}</p>
-                        <p><strong>End:</strong> {{ workingHour.end }}</p>
-                        <button (click)="onEditWorkingHours(i)" class="btn btn-secondary edit-btn">Edit</button>
-                    </div>
-        
-                    <!-- Show edit form if editing this working hour -->
-                    <div *ngIf="editingWorkingHoursIndex === i">
-                        <form [formGroup]="workingHoursForm" (ngSubmit)="onUpdateWorkingHours()">
-                            <div>
-                                <label for="dayOfWeek"><strong>Day of Week:</strong></label>
-                                <input id="dayOfWeek" formControlName="dayOfWeek" type="number">
-                            </div>
-                            <div>
-                                <label for="start"><strong>Start:</strong></label>
-                                <input id="start" formControlName="start" type="time">
-                            </div>
-                            <div>
-                                <label for="end"><strong>End:</strong></label>
-                                <input id="end" formControlName="end" type="time">
-                            </div>
-                            <button type="submit" class="btn btn-primary save-btn">Save Changes</button>
-                            <button type="button" (click)="cancelEditWorkingHours()" class="btn btn-secondary cancel-btn">Cancel</button>
-                            <button type="button" (click)="onDeleteWorkingHours(i)" class="btn btn-secondary cancel-btn">Delete</button>
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        
-        <h2 class="text-2xl font-semibold my-4">Medicine</h2>
-        <div>
-            <button (click)="showAddMedicineForm = !showAddMedicineForm" class="btn btn-primary add-btn"><strong>Add Medicine</strong></button>
-        </div>
-        <div *ngIf="showAddMedicineForm">
-            <form [formGroup]="medicineForm" (ngSubmit)="onAddMedicine()">
-                <div>
-                    <label for="medicineName"><strong>Name:</strong></label>
-                    <input id="medicineName" formControlName="name" type="text">
-                </div>
-                <div>
-                    <label for="medicineDescription"><strong>Description:</strong></label>
-                    <input id="medicineDescription" formControlName="description" type="text">
-                </div>
-                <div>
-                    <label for="medicineFrequency"><strong>Frequency:</strong></label>
-                    <input id="medicineFrequency" formControlName="frequency" type="text">
-                </div>
-                <div>
-                    <label for="medicineStartDate"><strong>Start Date:</strong></label>
-                    <input id="medicineStartDate" formControlName="startDate" type="date">
-                </div>
-                <div>
-                    <label for="medicineEndDate"><strong>End Date:</strong></label>
-                    <input id="medicineEndDate" formControlName="endDate" type="date">
-                </div>
-                <button type="submit" class="btn btn-primary save-btn">Submit</button>
-            </form>
-        </div>
-        <div *ngIf="user.medicin && user.medicin.length">
-            <ul>
-                <li *ngFor="let medicine of user.medicin; let i = index">
-                    <!-- Show text if not editing this medicine -->
-                    <div *ngIf="editingMedicineIndex !== i">
-                        <p><strong>Name:</strong> {{ medicine.name }}</p>
-                        <p><strong>Description:</strong> {{ medicine.description }}</p>
-                        <p><strong>Frequency:</strong> {{ medicine.frequency }}</p>
-                        <p><strong>Start Date:</strong> {{ medicine.startDate }}</p>
-                        <p><strong>End Date:</strong> {{ medicine.endDate }}</p>
-                        <button (click)="onEditMedicine(i)" class="btn btn-secondary edit-btn">Edit</button>
-                    </div>
-        
-                    <!-- Show edit form if editing this medicine -->
-                    <div *ngIf="editingMedicineIndex === i">
-                        <form [formGroup]="medicineForm" (ngSubmit)="onUpdateMedicine()">
-                            <div>
-                                <label for="name"><strong>Name:</strong></label>
-                                <input id="name" formControlName="name" type="text">
-                            </div>
-                            <div>
-                                <label for="description"><strong>Dosage:</strong></label>
-                                <input id="description" formControlName="description" type="text">
-                            </div>
-                            <div>
-                                <label for="frequency"><strong>Frequency:</strong></label>
-                                <input id="frequency" formControlName="frequency" type="text">
-                            </div>
-                            <div>
-                                <label for="startDate"><strong>Start Date:</strong></label>
-                                <input id="startDate" formControlName="startDate" type="date">
-                            </div>
-                            <div>
-                                <label for="endDate"><strong>End Date:</strong></label>
-                                <input id="endDate" formControlName="endDate" type="date">
-                            </div>
-                            <button type="submit" class="btn btn-primary save-btn">Save Changes</button>
-                            <button type="button" (click)="cancelEditMedicine()" class="btn btn-secondary cancel-btn">Cancel</button>
-                            <button type="button" (click)="onDeleteMedicine(i)" class="btn btn-secondary cancel-btn">Delete</button>
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </div>
+    <app-working-hours-user-details
+      [userId]="user.id"
+      [workingHours]="user.workingHours"
+      (workingHoursUpdated)="user.workingHours = $event"
+    ></app-working-hours-user-details>
 
-        <h2 class="text-2xl font-semibold my-4">Evaluations</h2>
-        <div>
-            <button (click)="showAddEvaluationForm = !showAddEvaluationForm" class="btn btn-primary add-btn"><strong>Add Evaluation</strong></button>
-        </div>
-        <div *ngIf="showAddEvaluationForm">
-            <form [formGroup]="evaluationForm" (ngSubmit)="onAddEvaluation()">
-                <div>
-                    <label for="evaluationDate"><strong>Date:</strong></label>
-                    <input id="evaluationDate" formControlName="date" type="date">
-                </div>
-                <div>
-                    <label for="evaluationProgress"><strong>Progress:</strong></label>
-                    <input id="evaluationProgress" formControlName="progress" type="text">
-                </div>
-                <div>
-                    <label for="evaluationDescription"><strong>Description:</strong></label>
-                    <input id="evaluationDescription" formControlName="description" type="text">
-                </div>
-                <div>
-                    <label for="evaluationPayment"><strong>Payment:</strong></label>
-                    <input id="evaluationPayment" formControlName="payment" type="text">
-                </div>
-                <div>
-                    <label for="evaluationComment"><strong>Comment:</strong></label>
-                    <input id="evaluationComment" formControlName="comment" type="text">
-                </div>
-                <button type="submit" class="btn btn-primary save-btn">Submit</button>
-            </form>
-        </div>
-        <div *ngIf="user.evaluations && user.evaluations.length">
-            <ul>
-                <li *ngFor="let evaluation of user.evaluations; let i = index">
-                    <!-- Show text if not editing this evaluation -->
-                    <div *ngIf="editingEvaluationIndex !== i">
-                        <p><strong>Date:</strong> {{ evaluation.date }}</p>
-                        <p><strong>Progress:</strong> {{ evaluation.progress }}</p>
-                        <p><strong>Description:</strong> {{ evaluation.description }}</p>
-                        <p><strong>Payment:</strong> {{ evaluation.payment }}</p>
-                        <p><strong>Comment:</strong> {{ evaluation.comment }}</p>
-                        <button (click)="onEditEvaluation(i)" class="btn btn-secondary edit-btn">Edit</button>
-                    </div>
-        
-                    <div *ngIf="editingEvaluationIndex === i">
-                        <form [formGroup]="evaluationForm" (ngSubmit)="onUpdateEvaluation()">
-                            <div>
-                                <label for="date"><strong>Date:</strong></label>
-                                <input id="date" formControlName="date" type="date">
-                            </div>
-                            <div>
-                                <label for="progress"><strong>Progress:</strong></label>
-                                <input id="progress" formControlName="progress" type="text">
-                            </div>
-                            <div>
-                                <label for="description"><strong>Description:</strong></label>
-                                <input id="description" formControlName="description" type="text">
-                            </div>
-                            <div>
-                                <label for="payment"><strong>Payment:</strong></label>
-                                <input id="payment" formControlName="payment" type="text">
-                            </div>
-                            <div>
-                                <label for="comment"><strong>Comment:</strong></label>
-                                <input id="comment" formControlName="comment" type="text">
-                            </div>
-                            <button type="submit" class="btn btn-primary save-btn">Save Changes</button>
-                            <button type="button" (click)="cancelEditEvaluation()" class="btn btn-secondary cancel-btn">Cancel</button>
-                            <button type="button" (click)="onDeleteEvaluation(i)" class="btn btn-secondary cancel-btn">Delete</button>
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </div>
+    <app-medicine-user-details
+      [userId]="user.id"
+      [medicin]="user.medicin"
+      (medicinesUpdated)="user.medicin = $event"
+    ></app-medicine-user-details>
 
-        <h2 class="text-2xl font-semibold my-4">Notes</h2>
-        <div>
-            <button (click)="showAddNoteForm = !showAddNoteForm" class="btn btn-primary add-btn"><strong>Add Note</strong></button>
-        </div>
-        <div *ngIf="showAddNoteForm">
-            <form [formGroup]="noteForm" (ngSubmit)="onAddNote()">
-                <div>
-                    <label for="noteTitle"><strong>Title:</strong></label>
-                    <input id="noteTitle" formControlName="title" type="text">
-                </div>
-                <div>
-                    <label for="noteContent"><strong>Content:</strong></label>
-                    <textarea id="noteContent" formControlName="content"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary save-btn">Submit</button>
-            </form>
-        </div>
-        <div *ngIf="user.notes && user.notes.length">
-            <ul>
-                <li *ngFor="let note of user.notes; let i = index">
-                    <!-- Show text if not editing this note -->
-                    <div *ngIf="editingNoteIndex !== i">
-                        <p><strong>Title:</strong> {{ note.title }}</p>
-                        <p><strong>Content:</strong> {{ note.content }}</p>
-                        <p><strong>Last update:</strong> {{ note.lastUpdate | date: 'yyyy-MM-dd'}}</p>
-                        <button (click)="onEditNote(i)" class="btn btn-secondary edit-btn">Edit</button>
-                    </div>
-        
-                    <!-- Show the edit form if editing this note -->
-                    <div *ngIf="editingNoteIndex === i">
-                        <form [formGroup]="noteForm" (ngSubmit)="onUpdateNote()">
-                            <div>
-                                <label for="title"><strong>Title:</strong></label>
-                                <input id="title" formControlName="title" type="text">
-                            </div>
-                            <div>
-                                <label for="content"><strong>Content:</strong></label>
-                                <textarea id="content" formControlName="content"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary save-btn">Save Changes</button>
-                            <button type="button" (click)="cancelEditNote()" class="btn btn-secondary cancel-btn">Cancel</button>
-                            <button type="button" (click)="onDeleteNote(i)" class="btn btn-secondary cancel-btn">Delete</button>
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </div>
+    <app-evaluation-user-details
+      [userId]="user.id"
+      [evaluations]="user.evaluations"
+      (evaluationsUpdated)="user.evaluations = $event"
+    ></app-evaluation-user-details>
 
-        <h2 class="text-2xl font-semibold my-4">Vacations</h2>
-        <div>
-            <button (click)="showAddVacationForm = !showAddVacationForm" class="btn btn-primary add-btn"><strong>Add Vacation</strong></button>
-        </div>
-        <div *ngIf="showAddVacationForm">
-            <form [formGroup]="vacationForm" (ngSubmit)="onAddVacation()">
-                <div>
-                    <label for="vacationStartDate"><strong>Start Date:</strong></label>
-                    <input id="vacationStartDate" formControlName="startDate" type="date">
-                </div>
-                <div>
-                    <label for="vacationEndDate"><strong>End Date:</strong></label>
-                    <input id="vacationEndDate" formControlName="endDate" type="date">
-                </div>
-                <div>
-                    <label for="vacationDescription"><strong>Description:</strong></label>
-                    <input id="vacationDescription" formControlName="description" type="text">
-                </div>
-                <button type="submit" class="btn btn-primary save-btn">Submit</button>
-            </form>
-        </div>
-        <div *ngIf="user.vacations && user.vacations.length">
-            <ul>
-                <li *ngFor="let vacation of user.vacations; let i = index">
-                    <!-- Show text if not editing this vacation -->
-                    <div *ngIf="editingVacationIndex !== i">
-                        <p><strong>Description:</strong> {{ vacation.description }}</p>
-                        <p><strong>Start Date:</strong> {{ vacation.startDate | date: 'yyyy-MM-dd' }}</p>
-                        <p><strong>End Date:</strong> {{ vacation.endDate | date: 'yyyy-MM-dd' }}</p>
-                        <button (click)="onEditVacation(i)" class="btn btn-secondary edit-btn">Edit</button>
-                    </div>
-        
-                    <!-- Show the create form fields if editing this vacation -->
-                    <div *ngIf="editingVacationIndex === i">
-                        <form [formGroup]="vacationForm" (ngSubmit)="onUpdateVacation()">
-                            <div>
-                                <label for="description"><strong>description:</strong></label>
-                                <input id="description" formControlName="description" type="text" placeholder="Enter vacation destination">
-                            </div>
-                            <div>
-                                <label for="startDate"><strong>Start Date:</strong></label>
-                                <input id="startDate" formControlName="startDate" type="date">
-                            </div>
-                            <div>
-                                <label for="endDate"><strong>End Date:</strong></label>
-                                <input id="endDate" formControlName="endDate" type="date">
-                            </div>
-                            <button type="submit" class="btn btn-primary save-btn">Save Changes</button>
-                            <button type="button" (click)="cancelEditVacation()" class="btn btn-secondary cancel-btn">Cancel</button>
-                            <button type="button" (click)="onDeleteVacation(i)" class="btn btn-secondary cancel-btn">Delete</button>
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </div>
+    <app-note-user-details
+      [userId]="user.id"
+      [notes]="user.notes"
+      (notesUpdated)="user.notes = $event"
+    ></app-note-user-details>
 
-        <h2 class="text-2xl font-semibold my-4">Memberships</h2>
-        <div>
-            <button (click)="showAddMembershipForm = !showAddMembershipForm" class="btn btn-primary add-btn"><strong>Add Membership</strong></button>
-        </div>
-        <div *ngIf="showAddMembershipForm">
-            <form [formGroup]="membershipForm" (ngSubmit)="onAddMembership()">
-                <div>
-                    <label for="membershipIsCurrent"><strong>Is Current:</strong></label>
-                    <input id="membershipIsCurrent" formControlName="isCurrent" type="checkbox">
-                </div>
-                <div>
-                    <label for="membershipFee"><strong>Fee:</strong></label>
-                    <input id="membershipFee" formControlName="fee" type="number">
-                </div>
-                <div>
-                    <label for="membershipTrainingTypeId"><strong>Training Type ID:</strong></label>
-                    <input id="membershipTrainingTypeId" formControlName="trainingTypeId" type="number">
-                </div>
-                <div>
-                    <label for="membershipFrequencyId"><strong>Frequency ID:</strong></label>
-                    <input id="membershipFrequencyId" formControlName="frequencyId" type="number">
-                </div>
-                <div>
-                    <label for="membershipStartDate"><strong>Start Date:</strong></label>
-                    <input id="membershipStartDate" formControlName="startDate" type="date">
-                </div>
-                <button type="submit" class="btn btn-primary save-btn">Submit</button>
-            </form>
-        </div>
-        <div *ngIf="user.memberships && user.memberships.length">
-            <ul>
-                <li *ngFor="let membership of user.memberships; let i = index">
-                    <!-- Show text if not editing this membership -->
-                    <div *ngIf="editingMembershipIndex !== i">
-                        <p><strong>Fee:</strong> {{ membership.fee }}</p>
-                        <p><strong>Training Type:</strong> {{ membership.trainingTypeId }}</p>
-                        <p><strong>Frequency:</strong> {{ membership.frequencyId }}</p>
-                        <p><strong>Start Date:</strong> {{ membership.startDate }}</p>
-                        <p><strong>Is Current:</strong> {{ membership.isCurrent ? 'Yes' : 'No' }}</p>
-                        <button (click)="onEditMembership(i)" class="btn btn-secondary edit-btn">Edit</button>
-                    </div>
-        
-                    <div *ngIf="editingMembershipIndex === i">
-                        <form [formGroup]="membershipForm" (ngSubmit)="onUpdateMembership()">
-                            <div>
-                                <label for="fee"><strong>Fee:</strong></label>
-                                <input id="fee" formControlName="fee" type="number">
-                            </div>
-                            <div>
-                                <label for="trainingTypeId"><strong>Training Type:</strong></label>
-                                <input id="trainingTypeId" formControlName="trainingTypeId" type="number">
-                            </div>
-                            <div>
-                                <label for="frequencyId"><strong>Frequency:</strong></label>
-                                <input id="frequencyId" formControlName="frequencyId" type="number">
-                            </div>
-                            <div>
-                                <label for="startDate"><strong>Start Date:</strong></label>
-                                <input id="startDate" formControlName="startDate" type="date">
-                            </div>
-                            <div>
-                                <label for="isCurrent"><strong>Is Current:</strong></label>
-                                <input id="isCurrent" formControlName="isCurrent" type="checkbox">
-                            </div>
-                            <button type="submit" class="btn btn-primary save-btn">Save Changes</button>
-                            <button type="button" (click)="cancelEditMembership()" class="btn btn-secondary cancel-btn">Cancel</button>
-                            <button type="button" (click)="onDeleteMembership(i)" class="btn btn-secondary cancel-btn">Delete</button>
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </div>
+    <app-membership-user-details
+      [userId]="user.id"
+      [memberships]="user.memberships"
+      (membershipsUpdated)="user.memberships = $event"
+    ></app-membership-user-details>
 
-        <h2 class="text-xl font-semibold my-4">Physical Issues</h2>
-        <div>
-            <button (click)="showAddPhysicalIssueForm = !showAddPhysicalIssueForm" class="btn btn-primary add-btn"><strong>Add Physical Issue</strong></button>
-        </div>
-        <div *ngIf="showAddPhysicalIssueForm">
-            <form [formGroup]="physicalIssueForm" (ngSubmit)="onAddPhysicalIssue()">
-                <div>
-                    <label for="issueName"><strong>Name:</strong></label>
-                    <input id="issueName" formControlName="name" type="text">
-                </div>
-                <div>
-                    <label for="issueDescription"><strong>Description:</strong></label>
-                    <input id="issueDescription" formControlName="description" type="text">
-                </div>
-                <div>
-                    <label for="issueStartDate"><strong>Start Date:</strong></label>
-                    <input id="issueStartDate" formControlName="startDate" type="date">
-                </div>
-                <div>
-                    <label for="issueEndDate"><strong>End Date:</strong></label>
-                    <input id="issueEndDate" formControlName="endDate" type="date">
-                </div>
-                <button type="submit" class="btn btn-primary save-btn">Submit</button>
-            </form>
-        </div>
-        <div *ngIf="user.phisicalIssues && user.phisicalIssues.length">
-            <ul>
-                <li *ngFor="let issue of user.phisicalIssues; let i = index">
-                    <!-- Show text if not editing this physical issue -->
-                    <div *ngIf="editingPhysicalIssueIndex !== i">
-                        <p><strong>Name:</strong> {{ issue.name }}</p>
-                        <p><strong>Description:</strong> {{ issue.description }}</p>
-                        <p><strong>Start Date:</strong> {{ issue.startDate | date: 'yyyy-MM-dd' }}</p>
-                        <p><strong>End Date:</strong> {{ issue.endDate | date: 'yyyy-MM-dd' }}</p>
-                        <button (click)="onEditPhysicalIssue(i)" class="btn btn-secondary edit-btn">Edit</button>
-                    </div>
-        
-                    <!-- Show the edit form if editing this physical issue -->
-                    <div *ngIf="editingPhysicalIssueIndex === i">
-                        <form [formGroup]="physicalIssueForm" (ngSubmit)="onUpdatePhysicalIssue()">
-                            <div>
-                                <label for="name"><strong>Name:</strong></label>
-                                <input id="name" formControlName="name" type="text" placeholder="Enter issue name">
-                            </div>
-                            <div>
-                                <label for="description"><strong>Description:</strong></label>
-                                <textarea id="description" formControlName="description" placeholder="Enter issue description"></textarea>
-                            </div>
-                            <div>
-                                <label for="startDate"><strong>Start Date:</strong></label>
-                                <input id="startDate" formControlName="startDate" type="date">
-                            </div>
-                            <div>
-                                <label for="endDate"><strong>End Date:</strong></label>
-                                <input id="endDate" formControlName="endDate" type="date">
-                            </div>
-                            <button type="submit" class="btn btn-primary save-btn">Save Changes</button>
-                            <button type="button" (click)="cancelEditPhysicalIssue()" class="btn btn-secondary cancel-btn">Cancel</button>
-                            <button type="button" (click)="onDeletePhysicalIssue(i)" class="btn btn-secondary cancel-btn">Delete</button>
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <app-vacation-user-details
+      [userId]="user.id"
+      [vacations]="user.vacations"
+      (vacationsUpdated)="user.vacations = $event"
+    ></app-vacation-user-details>
+
+    <app-physical-issue-user-details
+      [userId]="user.id"
+      [phisicalIssues]="user.phisicalIssues"
+      (phisicalIssuesUpdated)="user.phisicalIssues = $event"
+    ></app-physical-issue-user-details>
+
     <div class="delete-button-container">
-        <button class="btn btn-primary delete-button" (click)="deleteUser()"><strong>Delete User</strong></button>
+      <button class="btn btn-primary delete-button" (click)="deleteUser()">
+        <strong>Delete User</strong>
+      </button>
     </div>
+  </div>
 </div>

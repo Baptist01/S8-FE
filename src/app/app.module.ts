@@ -28,6 +28,16 @@ import { TrainerInfoCardComponent } from './components/trainer-info-card/trainer
 import { FusionAuthModule } from '@fusionauth/angular-sdk';
 import { provideHttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { AdresUserDetailsComponent } from './components/user-details/adres-user-details/adres-user-details.component';
+import { BaseUserDetailsComponent } from './components/user-details/base-user-details/base-user-details.component';
+import { ChildrenUserDetailsComponent } from './components/user-details/children-user-details/children-user-details.component';
+import { EvaluationUserDetailsComponent } from './components/user-details/evaluation-user-details/evaluation-user-details.component';
+import { MedicineUserDetailsComponent } from './components/user-details/medicine-user-details/medicine-user-details.component';
+import { MembershipUserDetailsComponent } from './components/user-details/membership-user-details/membership-user-details.component';
+import { NoteUserDetailsComponent } from './components/user-details/note-user-details/note-user-details.component';
+import { PhysicalIssueUserDetailsComponent } from './components/user-details/physical-issue-user-details/physical-issue-user-details.component';
+import { VacationUserDetailsComponent } from './components/user-details/vacation-user-details/vacation-user-details.component';
+import { WorkingHoursUserDetailsComponent } from './components/user-details/working-hours-user-details/working-hours-user-details.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +51,16 @@ import { CommonModule } from '@angular/common';
     HomeComponent,
   ],
   imports: [
+    AdresUserDetailsComponent,
+    BaseUserDetailsComponent,
+    ChildrenUserDetailsComponent,
+    EvaluationUserDetailsComponent,
+    MedicineUserDetailsComponent,
+    MembershipUserDetailsComponent,
+    NoteUserDetailsComponent,
+    PhysicalIssueUserDetailsComponent,
+    VacationUserDetailsComponent,
+    WorkingHoursUserDetailsComponent,
     CommonModule,
     MatPaginatorModule,
     MatMenuModule,

@@ -1,1 +1,82 @@
-<p>working-hours-user-details works!</p>
+<h2 class="text-2xl font-semibold my-4">Working hours</h2>
+<div>
+  <button
+    (click)="showAddWorkingHoursForm = !showAddWorkingHoursForm"
+    class="btn btn-primary add-btn"
+  >
+    <strong>Add Working Hours</strong>
+  </button>
+</div>
+<div *ngIf="showAddWorkingHoursForm">
+  <form [formGroup]="workingHoursForm" (ngSubmit)="onAddWorkingHours()">
+    <div>
+      <label for="dayOfWeek"><strong>Day of the week:</strong></label>
+      <input id="dayOfWeek" formControlName="dayOfWeek" type="number" />
+    </div>
+    <div>
+      <label for="start"><strong>Start Time:</strong></label>
+      <input id="start" formControlName="start" type="time" />
+    </div>
+    <div>
+      <label for="end"><strong>End Time:</strong></label>
+      <input id="end" formControlName="end" type="time" step="1800" />
+    </div>
+    <button type="submit" class="btn btn-primary save-btn">Submit</button>
+  </form>
+</div>
+<div>
+  <ul>
+    <li *ngFor="let workingHour of workingHours; let i = index">
+      <div *ngIf="editingWorkingHoursIndex !== i">
+        <p>
+          <strong>Day of Week:</strong>
+          {{ getDayOfWeek(workingHour.dayOfWeek) }}
+        </p>
+        <p><strong>Start:</strong> {{ workingHour.start }}</p>
+        <p><strong>End:</strong> {{ workingHour.end }}</p>
+        <button
+          (click)="onEditWorkingHours(i)"
+          class="btn btn-secondary edit-btn"
+        >
+          Edit
+        </button>
+      </div>
+      <div *ngIf="editingWorkingHoursIndex === i">
+        <form
+          [formGroup]="workingHoursForm"
+          (ngSubmit)="onUpdateWorkingHours()"
+        >
+          <div>
+            <label for="dayOfWeek"><strong>Day of Week:</strong></label>
+            <input id="dayOfWeek" formControlName="dayOfWeek" type="number" />
+          </div>
+          <div>
+            <label for="start"><strong>Start:</strong></label>
+            <input id="start" formControlName="start" type="time" />
+          </div>
+          <div>
+            <label for="end"><strong>End:</strong></label>
+            <input id="end" formControlName="end" type="time" />
+          </div>
+          <button type="submit" class="btn btn-primary save-btn">
+            Save Changes
+          </button>
+          <button
+            type="button"
+            (click)="cancelEditWorkingHours()"
+            class="btn btn-secondary cancel-btn"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            (click)="onDeleteWorkingHours(i)"
+            class="btn btn-secondary cancel-btn"
+          >
+            Delete
+          </button>
+        </form>
+      </div>
+    </li>
+  </ul>
+</div>

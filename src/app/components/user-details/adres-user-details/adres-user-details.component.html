@@ -1,1 +1,93 @@
-<p>adres-user-details works!</p>
+<h2 class="text-2xl font-semibold my-4">Addresses</h2>
+<div>
+  <button
+    (click)="showAddAddressForm = !showAddAddressForm"
+    class="btn btn-primary add-btn"
+  >
+    <strong>Add Address</strong>
+  </button>
+</div>
+<div *ngIf="showAddAddressForm">
+  <form [formGroup]="addressForm" (ngSubmit)="onAddAddress()">
+    <div>
+      <label for="street"><strong>Street:</strong></label>
+      <input id="street" formControlName="street" type="text" />
+    </div>
+    <div>
+      <label for="number"><strong>Number:</strong></label>
+      <input id="number" formControlName="number" type="text" />
+    </div>
+    <div>
+      <label for="city"><strong>City:</strong></label>
+      <input id="city" formControlName="city" type="text" />
+    </div>
+    <div>
+      <label for="postalCode"><strong>Postal Code:</strong></label>
+      <input id="postalCode" formControlName="postalCode" type="text" />
+    </div>
+    <div>
+      <label for="country"><strong>Country:</strong></label>
+      <input id="country" formControlName="country" type="text" />
+    </div>
+    <button type="submit" class="btn btn-primary save-btn">Submit</button>
+  </form>
+</div>
+<div *ngIf="adresses && adresses.length">
+  <ul>
+    <li *ngFor="let adress of adresses; let i = index">
+      <div *ngIf="editingAddressIndex !== i">
+        <p><strong>Street:</strong> {{ adress.street }}</p>
+        <p><strong>Number:</strong> {{ adress.number }}</p>
+        <p><strong>City:</strong> {{ adress.city }}</p>
+        <p><strong>Postal Code:</strong> {{ adress.postalCode }}</p>
+        <p><strong>Country:</strong> {{ adress.country }}</p>
+        <button (click)="onEditAddress(i)" class="btn btn-secondary edit-btn">
+          Edit
+        </button>
+      </div>
+      <div *ngIf="editingAddressIndex === i">
+        <form [formGroup]="addressForm" (ngSubmit)="onUpdateAddress()">
+          <div>
+            <label for="street"><strong>Street:</strong></label>
+            <input id="street" formControlName="street" type="text" />
+          </div>
+          <div>
+            <label for="number"><strong>Number:</strong></label>
+            <input id="number" formControlName="number" type="text" />
+          </div>
+          <div>
+            <label for="city"><strong>City:</strong></label>
+            <input id="city" formControlName="city" type="text" />
+          </div>
+          <div>
+            <label for="postalCode"><strong>Postal Code:</strong></label>
+            <input id="postalCode" formControlName="postalCode" type="text" />
+          </div>
+          <div>
+            <label for="country"><strong>Country:</strong></label>
+            <input id="country" formControlName="country" type="text" />
+          </div>
+          <button type="submit" class="btn btn-primary save-btn">
+            Save Changes
+          </button>
+          <button
+            type="button"
+            (click)="cancelEdit()"
+            class="btn btn-secondary cancel-btn"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            (click)="onDeleteAddress(i)"
+            class="btn btn-secondary cancel-btn"
+          >
+            Delete
+          </button>
+        </form>
+      </div>
+
+      <hr />
+    </li>
+  </ul>
+</div>

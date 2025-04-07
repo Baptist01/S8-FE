@@ -1,1 +1,104 @@
-<p>vacation-user-details works!</p>
+<h2 class="text-2xl font-semibold my-4">Vacations</h2>
+<div>
+  <button
+    (click)="showAddVacationForm = !showAddVacationForm"
+    class="btn btn-primary add-btn"
+  >
+    <strong>Add Vacation</strong>
+  </button>
+</div>
+<div *ngIf="showAddVacationForm">
+  <form [formGroup]="vacationForm" (ngSubmit)="onAddVacation()">
+    <div>
+      <label for="vacationRelevant"><strong>Not relevant:</strong></label>
+      <input
+        id="vacationRelevant"
+        formControlName="notRelevant"
+        type="checkbox"
+      />
+    </div>
+    <div>
+      <label for="vacationStartDate"><strong>Start Date:</strong></label>
+      <input id="vacationStartDate" formControlName="startDate" type="date" />
+    </div>
+    <div>
+      <label for="vacationEndDate"><strong>End Date:</strong></label>
+      <input id="vacationEndDate" formControlName="endDate" type="date" />
+    </div>
+    <div>
+      <label for="vacationDescription"><strong>Description:</strong></label>
+      <input
+        id="vacationDescription"
+        formControlName="description"
+        type="text"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary save-btn">Submit</button>
+  </form>
+</div>
+<div *ngIf="vacations && vacations.length">
+  <ul>
+    <li *ngFor="let vacation of vacations; let i = index">
+      <!-- Show text if not editing this vacation -->
+      <div *ngIf="editingVacationIndex !== i">
+        <div *ngIf="vacation.description === 'No vacation'">
+          <p><strong>No vacation</strong></p>
+        </div>
+        <div *ngIf="vacation.description !== 'No vacation'">
+          <p><strong>Description:</strong> {{ vacation.description }}</p>
+          <p>
+            <strong>Start Date:</strong>
+            {{ vacation.startDate | date: 'yyyy-MM-dd' }}
+          </p>
+          <p>
+            <strong>End Date:</strong>
+            {{ vacation.endDate | date: 'yyyy-MM-dd' }}
+          </p>
+        </div>
+        <button (click)="onEditVacation(i)" class="btn btn-secondary edit-btn">
+          Edit
+        </button>
+      </div>
+
+      <!-- Show the create form fields if editing this vacation -->
+      <div *ngIf="editingVacationIndex === i">
+        <form [formGroup]="vacationForm" (ngSubmit)="onUpdateVacation()">
+          <div>
+            <label for="description"><strong>description:</strong></label>
+            <input
+              id="description"
+              formControlName="description"
+              type="text"
+              placeholder="Enter vacation destination"
+            />
+          </div>
+          <div>
+            <label for="startDate"><strong>Start Date:</strong></label>
+            <input id="startDate" formControlName="startDate" type="date" />
+          </div>
+          <div>
+            <label for="endDate"><strong>End Date:</strong></label>
+            <input id="endDate" formControlName="endDate" type="date" />
+          </div>
+          <button type="submit" class="btn btn-primary save-btn">
+            Save Changes
+          </button>
+          <button
+            type="button"
+            (click)="cancelEditVacation()"
+            class="btn btn-secondary cancel-btn"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            (click)="onDeleteVacation(i)"
+            class="btn btn-secondary cancel-btn"
+          >
+            Delete
+          </button>
+        </form>
+      </div>
+    </li>
+  </ul>
+</div>

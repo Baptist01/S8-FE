@@ -1,1 +1,119 @@
-<p>physical-issue-user-details works!</p>
+<h2 class="text-xl font-semibold my-4">Physical Issues</h2>
+<div>
+  <button
+    (click)="showAddPhysicalIssueForm = !showAddPhysicalIssueForm"
+    class="btn btn-primary add-btn"
+  >
+    <strong>Add Physical Issue</strong>
+  </button>
+</div>
+<div *ngIf="showAddPhysicalIssueForm">
+  <form [formGroup]="physicalIssueForm" (ngSubmit)="onAddPhysicalIssue()">
+    <div>
+      <label for="issueType"><strong>Issue Type:</strong></label>
+      <select id="issueType" formControlName="issueType">
+        <option value="No issue">No issue</option>
+        <option value="Physical Issue">Physical Issue</option>
+        <option value="Mental Issue">Mental Issue</option>
+      </select>
+    </div>
+    <div>
+      <label for="issueName"><strong>Name:</strong></label>
+      <input id="issueName" formControlName="name" type="text" />
+    </div>
+    <div>
+      <label for="issueDescription"><strong>Description:</strong></label>
+      <input id="issueDescription" formControlName="description" type="text" />
+    </div>
+    <div>
+      <label for="issueStartDate"><strong>Start Date:</strong></label>
+      <input id="issueStartDate" formControlName="startDate" type="date" />
+    </div>
+    <div>
+      <label for="issueEndDate"><strong>End Date:</strong></label>
+      <input id="issueEndDate" formControlName="endDate" type="date" />
+    </div>
+    <button type="submit" class="btn btn-primary save-btn">Submit</button>
+  </form>
+</div>
+<div *ngIf="phisicalIssues && phisicalIssues.length">
+  <ul>
+    <li *ngFor="let issue of phisicalIssues; let i = index">
+      <!-- Show text if not editing this physical issue -->
+      <div *ngIf="editingPhysicalIssueIndex !== i">
+        <div *ngIf="issue.name === 'No issue'">
+          <p><strong>No Physical Issues</strong></p>
+        </div>
+        <div *ngIf="issue.name !== 'No issue'">
+          <p><strong>Name:</strong> {{ issue.name }}</p>
+          <p><strong>Description:</strong> {{ issue.description }}</p>
+          <p>
+            <strong>Start Date:</strong>
+            {{ issue.startDate | date: 'yyyy-MM-dd' }}
+          </p>
+          <p>
+            <strong>End Date:</strong>
+            {{ issue.endDate | date: 'yyyy-MM-dd' }}
+          </p>
+        </div>
+        <button
+          (click)="onEditPhysicalIssue(i)"
+          class="btn btn-secondary edit-btn"
+        >
+          Edit
+        </button>
+      </div>
+
+      <!-- Show the edit form if editing this physical issue -->
+      <div *ngIf="editingPhysicalIssueIndex === i">
+        <form
+          [formGroup]="physicalIssueForm"
+          (ngSubmit)="onUpdatePhysicalIssue()"
+        >
+          <div>
+            <label for="name"><strong>Name:</strong></label>
+            <input
+              id="name"
+              formControlName="name"
+              type="text"
+              placeholder="Enter issue name"
+            />
+          </div>
+          <div>
+            <label for="description"><strong>Description:</strong></label>
+            <textarea
+              id="description"
+              formControlName="description"
+              placeholder="Enter issue description"
+            ></textarea>
+          </div>
+          <div>
+            <label for="startDate"><strong>Start Date:</strong></label>
+            <input id="startDate" formControlName="startDate" type="date" />
+          </div>
+          <div>
+            <label for="endDate"><strong>End Date:</strong></label>
+            <input id="endDate" formControlName="endDate" type="date" />
+          </div>
+          <button type="submit" class="btn btn-primary save-btn">
+            Save Changes
+          </button>
+          <button
+            type="button"
+            (click)="cancelEditPhysicalIssue()"
+            class="btn btn-secondary cancel-btn"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            (click)="onDeletePhysicalIssue(i)"
+            class="btn btn-secondary cancel-btn"
+          >
+            Delete
+          </button>
+        </form>
+      </div>
+    </li>
+  </ul>
+</div>

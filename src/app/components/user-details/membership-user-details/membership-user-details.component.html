@@ -1,1 +1,121 @@
-<p>membership-user-details works!</p>
+<h2 class="text-2xl font-semibold my-4">Memberships</h2>
+<div>
+  <button
+    (click)="showAddMembershipForm = !showAddMembershipForm"
+    class="btn btn-primary add-btn"
+  >
+    <strong>Add Membership</strong>
+  </button>
+</div>
+<div *ngIf="showAddMembershipForm">
+  <form [formGroup]="membershipForm" (ngSubmit)="onAddMembership()">
+    <div>
+      <label for="membershipIsCurrent"><strong>Is Current:</strong></label>
+      <input
+        id="membershipIsCurrent"
+        formControlName="isCurrent"
+        type="checkbox"
+      />
+    </div>
+    <div>
+      <label for="membershipFee"><strong>Fee:</strong></label>
+      <input id="membershipFee" formControlName="fee" type="number" />
+    </div>
+    <div>
+      <label for="membershipTrainingTypeId"
+        ><strong>Training Type ID:</strong></label
+      >
+      <input
+        id="membershipTrainingTypeId"
+        formControlName="trainingTypeId"
+        type="number"
+      />
+    </div>
+    <div>
+      <label for="membershipFrequencyId"><strong>Frequency ID:</strong></label>
+      <input
+        id="membershipFrequencyId"
+        formControlName="frequencyId"
+        type="number"
+      />
+    </div>
+    <div>
+      <label for="membershipStartDate"><strong>Start Date:</strong></label>
+      <input id="membershipStartDate" formControlName="startDate" type="date" />
+    </div>
+    <button type="submit" class="btn btn-primary save-btn">Submit</button>
+  </form>
+</div>
+<div *ngIf="memberships && memberships.length">
+  <ul>
+    <li *ngFor="let membership of memberships; let i = index">
+      <!-- Show text if not editing this membership -->
+      <div *ngIf="editingMembershipIndex !== i">
+        <p><strong>Fee:</strong> {{ membership.fee }}</p>
+        <p><strong>Training Type:</strong> {{ membership.trainingTypeId }}</p>
+        <p><strong>Frequency:</strong> {{ membership.frequencyId }}</p>
+        <p><strong>Start Date:</strong> {{ membership.startDate }}</p>
+        <p>
+          <strong>Is Current:</strong>
+          {{ membership.isCurrent ? 'Yes' : 'No' }}
+        </p>
+        <button
+          (click)="onEditMembership(i)"
+          class="btn btn-secondary edit-btn"
+        >
+          Edit
+        </button>
+      </div>
+
+      <div *ngIf="editingMembershipIndex === i">
+        <form [formGroup]="membershipForm" (ngSubmit)="onUpdateMembership()">
+          <div>
+            <label for="fee"><strong>Fee:</strong></label>
+            <input id="fee" formControlName="fee" type="number" />
+          </div>
+          <div>
+            <label for="trainingTypeId"><strong>Training Type:</strong></label>
+            <input
+              id="trainingTypeId"
+              formControlName="trainingTypeId"
+              type="number"
+            />
+          </div>
+          <div>
+            <label for="frequencyId"><strong>Frequency:</strong></label>
+            <input
+              id="frequencyId"
+              formControlName="frequencyId"
+              type="number"
+            />
+          </div>
+          <div>
+            <label for="startDate"><strong>Start Date:</strong></label>
+            <input id="startDate" formControlName="startDate" type="date" />
+          </div>
+          <div>
+            <label for="isCurrent"><strong>Is Current:</strong></label>
+            <input id="isCurrent" formControlName="isCurrent" type="checkbox" />
+          </div>
+          <button type="submit" class="btn btn-primary save-btn">
+            Save Changes
+          </button>
+          <button
+            type="button"
+            (click)="cancelEditMembership()"
+            class="btn btn-secondary cancel-btn"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            (click)="onDeleteMembership(i)"
+            class="btn btn-secondary cancel-btn"
+          >
+            Delete
+          </button>
+        </form>
+      </div>
+    </li>
+  </ul>
+</div>

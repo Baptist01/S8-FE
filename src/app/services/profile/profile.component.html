@@ -1,98 +1,64 @@
 <section class="pt-28">
   <span class="mx-16">
-      <h1 class="text-5xl font-semibold my-4 mx-3 text-center">Welkom {{ user.firstName }} {{ user.lastName }}!</h1>
+    <h1 class="text-5xl font-semibold my-4 mx-3 text-center">
+      Welkom {{ user.firstName }} {{ user.lastName }}!
+    </h1>
   </span>
 </section>
 
 <div class="user-details-container">
   <div class="user-details">
-    <p><strong>Firstname:</strong> {{ user.firstName }}</p>
-    <p><strong>Middlenames:</strong> {{ user.middleName }}</p>
-    <p><strong>Lastname:</strong> {{ user.lastName }}</p>
-      <p><strong>Email:</strong> {{ user.email }}</p>
-      <p><strong>Phone Number:</strong> {{ user.phoneNumber }}</p>
-      <p><strong>Birth Date:</strong> {{ user.birthDate }}</p>
-      <p><strong>Work:</strong> {{ user.work }}</p>
-      <p><strong>Work Activities:</strong> {{ user.workActivities }}</p>
-      <p><strong>Smoking:</strong> {{ user.smoking }}</p>
-      <p><strong>Drinking:</strong> {{ user.drinking }}</p>
-      <hr>
+    <app-base-user-details
+      [user]="user"
+      (userUpdated)="user = $event"
+    ></app-base-user-details>
+    <hr />
 
-      <h2 class="text-xl font-semibold my-4">Adresses</h2>
-      <div *ngIf="user.adresses && user.adresses.length">
-        <ul>
-            <li *ngFor="let address of user.adresses">
-                <p><strong>Street:</strong> {{ address.street }}</p>
-                <p><strong>Number:</strong> {{ address.number }}</p>
-                <p><strong>City:</strong> {{ address.city }}</p>
-                <p><strong>Postal Code:</strong> {{ address.postalCode }}</p>
-                <p><strong>Country:</strong> {{ address.country }}</p>
-                <hr>
-            </li>
-        </ul>
-    </div>
+    <app-adres-user-details
+      [userId]="user.id"
+      [adresses]="user.adresses"
+      (addressesUpdated)="user.adresses = $event"
+    >
+    </app-adres-user-details>
 
-      <h2 class="text-xl font-semibold my-4">Memberships</h2>
-      <div *ngIf="user.memberships && user.memberships.length">
-        <ul>
-            <li *ngFor="let membership of user.memberships">
-                <p><strong>Is Current:</strong> {{ membership.isCurrent }}</p>
-                <p><strong>Fee:</strong> {{ membership.fee }}</p>
-                <p><strong>Training Type ID:</strong> {{ membership.trainingTypeId }}</p>
-                <p><strong>Frequency ID:</strong> {{ membership.frequencyId }}</p>
-                <p><strong>Start Date:</strong> {{ membership.startDate }}</p>
-                <hr>
-            </li>
-        </ul>
-      </div>
-
-      <h2 class="text-xl font-semibold my-4">Children</h2>
-      <div *ngIf="user.children && user.children.length">
-        <ul>
-            <li *ngFor="let child of user.children">
-                <p><strong>Name:</strong> {{ child.name }}</p>
-                <p><strong>Birth Date:</strong> {{ child.birthDate }}</p>
-                <hr>
-            </li>
-        </ul>
-    </div>
-
-    <h2 class="text-xl font-semibold my-4">Medicine</h2>
-    <div *ngIf="user.medicin && user.medicin.length">
+    <h2 class="text-xl font-semibold my-4">Memberships</h2>
+    <div *ngIf="user.memberships && user.memberships.length">
       <ul>
-          <li *ngFor="let med of user.medicin">
-              <p><strong>Name:</strong> {{ med.name }}</p>
-              <p><strong>Description:</strong> {{ med.description }}</p>
-              <p><strong>Frequency:</strong> {{ med.frequency }}</p>
-              <p><strong>Start Date:</strong> {{ med.startDate }}</p>
-              <p><strong>End Date:</strong> {{ med.endDate }}</p>
-              <hr>
-          </li>
-      </ul>
-    </div>
-    <h2 class="text-xl font-semibold my-4">Physical Issues</h2>
-    <div *ngIf="user.phisicalIssues && user.phisicalIssues.length">
-      <ul>
-          <li *ngFor="let issue of user.phisicalIssues">
-              <p><strong>Name:</strong> {{ issue.name }}</p>
-              <p><strong>Description:</strong> {{ issue.description }}</p>
-              <p><strong>Start Date:</strong> {{ issue.startDate }}</p>
-              <p><strong>End Date:</strong> {{ issue.endDate }}</p>
-              <hr>
-          </li>
+        <li *ngFor="let membership of user.memberships">
+          <p><strong>Is Current:</strong> {{ membership.isCurrent }}</p>
+          <p><strong>Fee:</strong> {{ membership.fee }}</p>
+          <p>
+            <strong>Training Type ID:</strong> {{ membership.trainingTypeId }}
+          </p>
+          <p><strong>Frequency ID:</strong> {{ membership.frequencyId }}</p>
+          <p><strong>Start Date:</strong> {{ membership.startDate }}</p>
+          <hr />
+        </li>
       </ul>
     </div>
 
-    <h2 class="text-xl font-semibold my-4">Vacations</h2>
-    <div *ngIf="user.vacations && user.vacations.length">
-      <ul>
-          <li *ngFor="let vacation of user.vacations">
-              <p><strong>Start Date:</strong> {{ vacation.startDate }}</p>
-              <p><strong>End Date:</strong> {{ vacation.endDate }}</p>
-              <p><strong>Description:</strong> {{ vacation.description }}</p>
-              <hr>
-          </li>
-      </ul>
-    </div>
+    <app-children-user-details
+      [userId]="user.id"
+      [children]="user.children"
+      (childrenUpdated)="user.children = $event"
+    ></app-children-user-details>
+
+    <app-medicine-user-details
+      [userId]="user.id"
+      [medicin]="user.medicin"
+      (medicinesUpdated)="user.medicin = $event"
+    ></app-medicine-user-details>
+
+    <app-physical-issue-user-details
+      [userId]="user.id"
+      [phisicalIssues]="user.phisicalIssues"
+      (phisicalIssuesUpdated)="user.phisicalIssues = $event"
+    ></app-physical-issue-user-details>
+
+    <app-vacation-user-details
+      [userId]="user.id"
+      [vacations]="user.vacations"
+      (vacationsUpdated)="user.vacations = $event"
+    ></app-vacation-user-details>
   </div>
 </div>

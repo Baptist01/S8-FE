@@ -1,1 +1,110 @@
-<p>medicine-user-details works!</p>
+<h2 class="text-2xl font-semibold my-4">Medicine</h2>
+<div>
+  <button
+    (click)="showAddMedicineForm = !showAddMedicineForm"
+    class="btn btn-primary add-btn"
+  >
+    <strong>Add Medicine</strong>
+  </button>
+</div>
+<div *ngIf="showAddMedicineForm">
+  <form [formGroup]="medicineForm" (ngSubmit)="onAddMedicine()">
+    <div>
+      <label for="medicineNotRelevant"><strong>Not relevant:</strong></label>
+      <input
+        id="medicineNotRelevant"
+        formControlName="notRelevant"
+        type="checkbox"
+      />
+    </div>
+    <div>
+      <label for="medicineName"><strong>Name:</strong></label>
+      <input id="medicineName" formControlName="name" type="text" />
+    </div>
+    <div>
+      <label for="medicineDescription"><strong>Description:</strong></label>
+      <input
+        id="medicineDescription"
+        formControlName="description"
+        type="text"
+      />
+    </div>
+    <div>
+      <label for="medicineFrequency"><strong>Frequency:</strong></label>
+      <input id="medicineFrequency" formControlName="frequency" type="text" />
+    </div>
+    <div>
+      <label for="medicineStartDate"><strong>Start Date:</strong></label>
+      <input id="medicineStartDate" formControlName="startDate" type="date" />
+    </div>
+    <div>
+      <label for="medicineEndDate"><strong>End Date:</strong></label>
+      <input id="medicineEndDate" formControlName="endDate" type="date" />
+    </div>
+    <button type="submit" class="btn btn-primary save-btn">Submit</button>
+  </form>
+</div>
+<div *ngIf="medicin && medicin.length">
+  <ul>
+    <li *ngFor="let medicine of medicin; let i = index">
+      <div *ngIf="editingMedicineIndex !== i">
+        <div *ngIf="medicine.name === 'No medicine'">
+          <p><strong>No medicine</strong></p>
+        </div>
+        <div *ngIf="medicine.name !== 'No medicine'">
+          <p><strong>Name:</strong> {{ medicine.name }}</p>
+          <p><strong>Description:</strong> {{ medicine.description }}</p>
+          <p><strong>Frequency:</strong> {{ medicine.frequency }}</p>
+          <p><strong>Start Date:</strong> {{ medicine.startDate }}</p>
+          <p><strong>End Date:</strong> {{ medicine.endDate }}</p>
+        </div>
+
+        <button (click)="onEditMedicine(i)" class="btn btn-secondary edit-btn">
+          Edit
+        </button>
+      </div>
+
+      <div *ngIf="editingMedicineIndex === i">
+        <form [formGroup]="medicineForm" (ngSubmit)="onUpdateMedicine()">
+          <div>
+            <label for="name"><strong>Name:</strong></label>
+            <input id="name" formControlName="name" type="text" />
+          </div>
+          <div>
+            <label for="description"><strong>Dosage:</strong></label>
+            <input id="description" formControlName="description" type="text" />
+          </div>
+          <div>
+            <label for="frequency"><strong>Frequency:</strong></label>
+            <input id="frequency" formControlName="frequency" type="text" />
+          </div>
+          <div>
+            <label for="startDate"><strong>Start Date:</strong></label>
+            <input id="startDate" formControlName="startDate" type="date" />
+          </div>
+          <div>
+            <label for="endDate"><strong>End Date:</strong></label>
+            <input id="endDate" formControlName="endDate" type="date" />
+          </div>
+          <button type="submit" class="btn btn-primary save-btn">
+            Save Changes
+          </button>
+          <button
+            type="button"
+            (click)="cancelEditMedicine()"
+            class="btn btn-secondary cancel-btn"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            (click)="onDeleteMedicine(i)"
+            class="btn btn-secondary cancel-btn"
+          >
+            Delete
+          </button>
+        </form>
+      </div>
+    </li>
+  </ul>
+</div>

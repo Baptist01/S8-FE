@@ -1,1 +1,81 @@
-<p>children-user-details works!</p>
+<h2 class="text-2xl font-semibold my-4">Children</h2>
+<div>
+  <button
+    (click)="showAddChildForm = !showAddChildForm"
+    class="btn btn-primary add-btn"
+  >
+    <strong>Add Child</strong>
+  </button>
+</div>
+<div *ngIf="showAddChildForm">
+  <form [formGroup]="childForm" (ngSubmit)="onAddChild()">
+    <div>
+      <label for="childNotRelevant"><strong>Niet relevant:</strong></label>
+      <input
+        id="childNotRelevant"
+        formControlName="notRelevant"
+        type="checkbox"
+      />
+    </div>
+    <div>
+      <label for="childName"><strong>Name:</strong></label>
+      <input id="childName" formControlName="name" type="text" />
+    </div>
+    <div>
+      <label for="childBirthDate"><strong>Birth Date:</strong></label>
+      <input id="childBirthDate" formControlName="birthDate" type="date" />
+    </div>
+    <button type="submit" class="btn btn-primary save-btn">Submit</button>
+  </form>
+</div>
+<div *ngIf="children && children.length">
+  <ul>
+    <li *ngFor="let child of children; let i = index">
+      <div *ngIf="editingChildIndex !== i">
+        <div *ngIf="child.name === 'No Child'">
+          <p><strong>No Children</strong></p>
+        </div>
+        <div *ngIf="child.name !== 'No Child'">
+          <p><strong>Name:</strong> {{ child.name }}</p>
+          <p><strong>Birth Date:</strong> {{ child.birthDate }}</p>
+        </div>
+        <button (click)="onEditChild(i)" class="btn btn-secondary edit-btn">
+          Edit
+        </button>
+      </div>
+      <div *ngIf="editingChildIndex === i">
+        <form [formGroup]="childForm" (ngSubmit)="onUpdateChild()">
+          <div>
+            <label for="relevant"><strong>Niet relevant:</strong></label>
+            <input id="relevant" formControlName="relevant" type="checkbox" />
+          </div>
+          <div>
+            <label for="name"><strong>Name:</strong></label>
+            <input id="name" formControlName="name" type="text" />
+          </div>
+          <div>
+            <label for="birthDate"><strong>Birth Date:</strong></label>
+            <input id="birthDate" formControlName="birthDate" type="date" />
+          </div>
+          <button type="submit" class="btn btn-primary save-btn">
+            Save Changes
+          </button>
+          <button
+            type="button"
+            (click)="cancelEditChild()"
+            class="btn btn-secondary cancel-btn"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            (click)="onDeleteChild(i)"
+            class="btn btn-secondary cancel-btn"
+          >
+            Delete
+          </button>
+        </form>
+      </div>
+    </li>
+  </ul>
+</div>
