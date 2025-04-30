@@ -38,6 +38,8 @@ import { NoteUserDetailsComponent } from './components/user-details/note-user-de
 import { PhysicalIssueUserDetailsComponent } from './components/user-details/physical-issue-user-details/physical-issue-user-details.component';
 import { VacationUserDetailsComponent } from './components/user-details/vacation-user-details/vacation-user-details.component';
 import { WorkingHoursUserDetailsComponent } from './components/user-details/working-hours-user-details/working-hours-user-details.component';
+import {provideAnimations} from '@angular/platform-browser/animations';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -80,14 +82,9 @@ import { WorkingHoursUserDetailsComponent } from './components/user-details/work
     ReactiveFormsModule,
     TrainerInfoCardComponent,
     ContactFormComponent,
-    FusionAuthModule.forRoot({
-      clientId: environment.auth.clientId,
-      serverUrl: environment.auth.serverUrl,
-      redirectUri: environment.auth.redirectUri,
-      postLogoutRedirectUri: environment.auth.postLogoutRedirectUri,
-      scope: environment.auth.scope,
-      shouldAutoRefresh: true,
-    }),
+    MatPaginatorModule,
+    MatSidenavModule,
+    OAuthModule.forRoot()
   ],
   providers: [
     provideHttpClient(),
