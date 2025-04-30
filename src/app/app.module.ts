@@ -11,7 +11,7 @@ import { ProfessionalPersonalTrainingComponent } from './services/professional-p
 import { ContactComponent } from './services/contact/contact.component';
 import { NgOptimizedImage } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -22,10 +22,8 @@ import { ContactButtonComponent } from './components/contact-button/contact-butt
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { environment } from '../enviroment/enviroment';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
 import { TrainerInfoCardComponent } from './components/trainer-info-card/trainer-info-card.component';
-import { FusionAuthModule } from '@fusionauth/angular-sdk';
 import { provideHttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { AdresUserDetailsComponent } from './components/user-details/adres-user-details/adres-user-details.component';
@@ -38,8 +36,9 @@ import { NoteUserDetailsComponent } from './components/user-details/note-user-de
 import { PhysicalIssueUserDetailsComponent } from './components/user-details/physical-issue-user-details/physical-issue-user-details.component';
 import { VacationUserDetailsComponent } from './components/user-details/vacation-user-details/vacation-user-details.component';
 import { WorkingHoursUserDetailsComponent } from './components/user-details/working-hours-user-details/working-hours-user-details.component';
-import {provideAnimations} from '@angular/platform-browser/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 @NgModule({
   declarations: [
@@ -87,7 +86,9 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     OAuthModule.forRoot()
   ],
   providers: [
+    provideAnimations(),
     provideHttpClient(),
+    provideNativeDateAdapter()
   ],
   bootstrap: [AppComponent],
 })

@@ -22,71 +22,88 @@
         }"
       >
         <ul
-          class="flex flex-col lg:flex-row lg:space-x-8 font-medium bg-white rounded"
+          class="flex flex-col lg:flex-row lg:space-x-6 font-medium bg-white rounded"
         >
           <li class="">
             <a
               href="/"
-              class="text-black hover:bg-gray-100 rounded block px-3 py-2"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2"
               >Home</a
             >
-          </li>
           <li>
             <a
               href="/personal-training"
-              class="text-black hover:bg-gray-100 rounded block px-3 py-2"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2"
               >Personal training</a
             >
           </li>
           <li>
             <a
               href="/professional-personal-training"
-              class="text-black hover:bg-gray-100 rounded block px-3 py-2"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2"
               >Professional personal training</a
             >
           </li>
           <li>
             <a
               href="/over-ons"
-              class="text-black hover:bg-gray-100 rounded block px-3 py-2"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2"
               >Over ons</a
             >
           </li>
           <li>
             <a
               href="/contact"
-              class="text-black hover:bg-gray-100 rounded block px-3 py-2"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2"
               >Contact</a
             >
           </li>
           <li>
             <a
+              *ngIf="isLoggedIn && isTrainer"
+              href="/agenda"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2"
+              >Trainer Agenda</a
+            >
+          </li>
+          <li>
+            <a
+              *ngIf="isLoggedIn "
+              href="/agenda-users"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2"
+              >Agenda</a
+            >
+          </li>
+          <li>
+            <a
+              *ngIf="isLoggedIn && isAdmin"
               href="/users"
-              class="text-black hover:bg-gray-100 rounded block px-3 py-2"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2"
               >Users Overview</a
             >
           </li>
           <li>
             <a
+              *ngIf="isLoggedIn"
               href="/profile"
-              class="text-black hover:bg-gray-100 rounded block px-3 py-2"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2"
               >Profile</a
             >
           </li>
-          <li>
+            <li>
             <a
               *ngIf="isLoggedIn"
               (click)="logout()"
-              class="text-black hover:bg-gray-100 rounded block px-3 py-2 cursor-pointer"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2 cursor-pointer"
               >logout</a
             >
             <a
               *ngIf="!isLoggedIn"
               (click)="login()"
-              class="text-black hover:bg-gray-100 rounded block px-3 py-2 cursor-pointer"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2 cursor-pointer"
               >login</a
             >
-          </li>
+            </li>
         </ul>
       </div>
     </div>

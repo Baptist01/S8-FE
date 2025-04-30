@@ -8,9 +8,12 @@ import { ContactComponent } from './services/contact/contact.component';
 import { ProfileComponent } from './services/profile/profile.component';
 import { UserOverviewComponent } from './services/user-overview/user-overview-component.component';
 import { UserDetailsComponent } from './services/user-details/user-details-component.component';
-import { authGuard } from './auth-guard';
 import { UserCreateComponent } from './services/user-create/user-create.component';
-
+import { AgendaComponent } from './services/agenda/agenda.component';
+import { AgendaUsersComponent } from './services/agenda-users/agenda.component';
+import { TrainingCreateComponent } from './services/training-create/training-create.component';
+import { TrainingEditComponent } from './services/training-edit/training-edit.component';
+import { CallbackComponent } from './services/callback/callback.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,10 +21,15 @@ const routes: Routes = [
   { path: 'personal-training', component: PersonalTrainingComponent },
   { path: 'professional-personal-training', component: ProfessionalPersonalTrainingComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'agenda', component: AgendaComponent },
+  { path: 'agenda-users', component: AgendaUsersComponent },
+  { path: 'training/create', component: TrainingCreateComponent },
+  { path: 'training/edit/:id', component: TrainingEditComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'users', component: UserOverviewComponent },
   { path: 'users/:id', component: UserDetailsComponent },
-  { path: 'user/create', component: UserCreateComponent}
+  { path: 'user/create', component: UserCreateComponent },
+  { path: 'callback', component: CallbackComponent },
 ];
 
 @NgModule({

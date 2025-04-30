@@ -1,0 +1,60 @@
+<section class="pt-28">
+  <span class="mx-16">
+    <div class="flex items-center justify-between mx-12">
+      <div class="add-button">
+        <a href="/training/create" class="btn btn-primary">Add Training</a>
+      </div>
+      <h1 class="text-3xl font-semibold mx-3 text-center">Agenda</h1>
+      <div class="mx-28"></div>
+    </div>
+    <div class="scrollable-container mx-4" #scrollableContainer>
+      <div *ngFor="let date of sortedDates">
+        <h2
+          class="date-header"
+          [id]="'date-' + date"
+          [ngClass]="{ 'past-date': isPastDate(date) }"
+        >
+          {{ date }}
+        </h2>
+        <table>
+          <tr>
+            <th class="name-column">Type training</th>
+            <th>Naam</th>
+            <th class="email-column">Omschrijving</th>
+            <th>Start tijd</th>
+            <th>Eind tijd</th>
+            <th>Deelnemers</th>
+            <th>Max Deelnemers</th>
+            <th>Acties</th>
+          </tr>
+          <tr *ngFor="let training of groupedTrainings[date]">
+            <td class="name-column">{{ training.type }}</td>
+            <td>{{ training.name }}</td>
+            <td class="email-column">{{ training.description }}</td>
+            <td>{{ training.start_time }}</td>
+            <td>{{ training.end_time }}</td>
+            <td
+              (mouseenter)="
+                training.hovered = true; showUserNames(training.users)
+              "
+              (mouseleave)="training.hovered = false; hideUserNames()"
+            >
+              {{ training.users.length }}
+              <div *ngIf="training.hovered" class="tooltip">
+                {{ hoveredUsers }}
+              </div>
+            </td>
+            <td>{{ training.max_participants }}</td>
+            <td>
+              <a
+                [href]="'/training/edit/' + training.id"
+                class="btn btn-primary"
+                >Edit</a
+              >
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </span>
+</section>

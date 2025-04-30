@@ -1,0 +1,79 @@
+table {
+  border-collapse: collapse;
+  width: 94%;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.email-column {
+  display: table-cell;
+}
+
+@media (max-width: 500px) {
+  .email-column {
+    display: none;
+  }
+}
+
+.add-button {
+  margin: 10px 3%;
+  padding: 10px;
+  background-color: #ea2929;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  max-width: 100px;
+}
+
+.completeProfileTrue {
+  color: #4caf50;
+}
+
+.completeProfileFalse {
+  color: #f44336;
+}
+
+.tooltip {
+  white-space: pre-wrap; /* Preserve line breaks */
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  z-index: 1000;
+}
+
+.scrollable-container {
+  max-height: 440px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 2px;
+  position: relative;
+}
+
+.date-header {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.past-date {
+  color: gray;
+  font-size: 16px;
+  font-weight: normal;
+}
