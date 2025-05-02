@@ -10,6 +10,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { environment } from 'src/enviroment/enviroment';
 import { Router } from '@angular/router';
+import { delay } from 'rxjs';
 
 interface TrainingResponse {
   id: string;
@@ -88,9 +89,9 @@ export class TrainingCreateComponent implements OnInit {
     );
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     if (this.trainingForm.valid) {
-      this.http
+      await this.http
         .post<TrainingResponse>(
           environment.api.url + '/trainings',
           this.trainingForm.value,
@@ -150,14 +151,15 @@ export class TrainingCreateComponent implements OnInit {
                   },
                 );
             }
+            this.router.navigate(['/agenda']);
+
           },
           (error) => {
             console.error('Error adding training', error);
           },
         );
     }
-
-    this.router.navigate(['/agenda']);
+    await delay(1000);
   }
 
   get trainingTypes(): string[] {

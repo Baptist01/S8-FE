@@ -155,9 +155,9 @@ export class TrainingEditComponent implements OnInit {
           environment.api.url + '/trainings/editTraining',
           requestBody,
         )
-        .subscribe(() => {}, console.error);
-
-      this.router.navigate(['/agenda']);
+        .subscribe(() => {
+          this.router.navigate(['/agenda']);
+        }, console.error);
     }
   }
 

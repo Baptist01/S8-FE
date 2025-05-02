@@ -39,6 +39,7 @@ import { WorkingHoursUserDetailsComponent } from './components/user-details/work
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { OAuthModule } from 'angular-oauth2-oidc';
+import { TitleComponent } from './components/title/title.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     ProfessionalPersonalTrainingComponent,
     ContactComponent,
     ContactButtonComponent,
-    HomeComponent,
+    TitleComponent,
   ],
   imports: [
     AdresUserDetailsComponent,
