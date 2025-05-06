@@ -1,0 +1,29 @@
+# Ignore node_modules
+node_modules
+
+# Ignore build output
+dist
+build
+out-tsc
+
+# Ignore logs
+*.log
+
+# Ignore environment files
+.env
+.env.*
+
+# Ignore local development files
+*.local
+
+# Ignore Docker files themselves
+Dockerfile
+docker-compose*
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore Angular specific files/folders
+.angular
+coverage
