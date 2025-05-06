@@ -40,6 +40,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { TitleComponent } from './components/title/title.component';
+import { environment } from 'src/enviroment/enviroment';
+import { FusionAuthModule } from '@fusionauth/angular-sdk';
 
 @NgModule({
   declarations: [
@@ -84,7 +86,15 @@ import { TitleComponent } from './components/title/title.component';
     ContactFormComponent,
     MatPaginatorModule,
     MatSidenavModule,
-    OAuthModule.forRoot()
+    OAuthModule.forRoot(),
+    FusionAuthModule.forRoot({
+      clientId: environment.auth.clientId, 
+      serverUrl: environment.auth.serverUrl, 
+      redirectUri: environment.auth.redirectUri, 
+      // postLogoutRedirectUri: environment.auth.postLogoutRedirectUri,
+      scope: environment.auth.scope,
+      shouldAutoRefresh: true 
+    }),
   ],
   providers: [
     provideAnimations(),

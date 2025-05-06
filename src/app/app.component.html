@@ -30,6 +30,8 @@
               class="text-black hover:bg-gray-100 rounded block px-2 py-2"
               >Home</a
             >
+          </li>
+
           <li>
             <a
               href="/personal-training"
@@ -68,20 +70,20 @@
           </li>
           <li>
             <a
-              *ngIf="isLoggedIn "
+              *ngIf="isLoggedIn"
               href="/agenda-users"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2"
               >Agenda</a
             >
           </li>
-          <!-- <li>
+          <li>
             <a
               *ngIf="isLoggedIn && isAdmin"
               href="/users"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2"
               >Users Overview</a
             >
-          </li> -->
+          </li>
           <li>
             <a
               *ngIf="isLoggedIn"
@@ -90,7 +92,7 @@
               >Profile</a
             >
           </li>
-            <li>
+          <li>
             <a
               *ngIf="isLoggedIn"
               (click)="logout()"
@@ -103,7 +105,7 @@
               class="text-black hover:bg-gray-100 rounded block px-2 py-2 cursor-pointer"
               >login</a
             >
-            </li>
+          </li>
         </ul>
       </div>
     </div>

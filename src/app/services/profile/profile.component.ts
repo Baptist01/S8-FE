@@ -7,11 +7,8 @@ import { ChildrenUserDetailsComponent } from 'src/app/components/user-details/ch
 import { MedicineUserDetailsComponent } from 'src/app/components/user-details/medicine-user-details/medicine-user-details.component';
 import { PhysicalIssueUserDetailsComponent } from 'src/app/components/user-details/physical-issue-user-details/physical-issue-user-details.component';
 import { VacationUserDetailsComponent } from 'src/app/components/user-details/vacation-user-details/vacation-user-details.component';
-import { OAuthService } from 'angular-oauth2-oidc';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/auth-guard-service';
 import { environment } from 'src/enviroment/enviroment';
-import { delay } from 'cypress/types/bluebird';
 
 @Component({
   selector: 'app-profile',
@@ -34,19 +31,12 @@ export class ProfileComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService,
   ) {}
 
   async ngOnInit(): Promise<void> {
-    if (!this.authService.isLoggedIn()) {
-      this.router.navigate(['/']);
-    }
-    const token = (await localStorage.getItem('access_token')) || '';
     this.http
       .get<any[]>(environment.api.url + '/users/profile', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        withCredentials: true,
       })
       .subscribe((data) => {
         this.user = data;
