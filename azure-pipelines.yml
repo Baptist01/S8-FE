@@ -18,5 +18,11 @@ steps:
 - script: |
     npm install -g @angular/cli
     npm install
-    ng serve --configuration production
+    ng build --configuration production
   displayName: 'npm install and build'
+
+- task: Docker@2
+  inputs:
+    repository: 'NoworNeversports'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
