@@ -43,8 +43,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   login() {
+    console.log('login');
     this.fusionAuthService.startLogin();
   }
+
   logout() {
     this.fusionAuthService.logout();
   }

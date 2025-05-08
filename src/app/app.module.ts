@@ -91,7 +91,7 @@ import { FusionAuthModule } from '@fusionauth/angular-sdk';
       clientId: environment.auth.clientId, 
       serverUrl: environment.auth.serverUrl, 
       redirectUri: environment.auth.redirectUri, 
-      // postLogoutRedirectUri: environment.auth.postLogoutRedirectUri,
+      postLogoutRedirectUri: environment.auth.postLogoutRedirectUri,
       scope: environment.auth.scope,
       shouldAutoRefresh: true 
     }),

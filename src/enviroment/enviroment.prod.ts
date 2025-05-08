@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   apiKey: 'devKey',
   auth: {
-    clientId: '29f41feb-c86d-4573-a50a-95fcd46f40a5',
+    clientId: 'fab9c0df-a37b-4b41-864f-5fbe3b3b2f38',
     serverUrl: 'http://localhost:9011',
     redirectUri: 'http://localhost:4200/callback',
     postLogoutRedirectUri: 'http://localhost:4200/',

@@ -41,7 +41,9 @@ export class AgendaUsersComponent {
   }
 
   getTrainings(): void {
-    this.http.get<any[]>(environment.api.url + '/trainings/GetTrainingForUsers').subscribe((response) => {
+    this.http.get<any[]>(environment.api.url + '/trainings/GetTrainingForUsers', {
+      withCredentials: true,
+    }).subscribe((response) => {
       this.trainings = response;
 
       // Group trainings by date
@@ -112,14 +114,18 @@ export class AgendaUsersComponent {
   }
 
   subscribeToTraining(trainingId: string): void {
-    this.http.post(environment.api.url + '/trainings/addUser', { trainingId, userId: '0195ffae-e288-7eeb-acdb-a121fd12c718', roleId: 1 }).subscribe((response) => {
+    this.http.post(environment.api.url + '/trainings/addUser', { 
+      withCredentials: true,
+    }).subscribe((response) => {
       console.log('Subscribed to training:', response);
       this.getTrainings(); // Refresh the trainings after subscribing
     });
   }
 
   unsubscribeFromTraining(trainingId: string): void {
-    this.http.delete(environment.api.url + '/trainings/deleteuserfromtrainingbyuser?trainingid=' + trainingId + '&userid=0195ffae-e288-7eeb-acdb-a121fd12c718').subscribe((response) => {
+    this.http.delete(environment.api.url + '/trainings/deleteuserfromtrainingbyuser?trainingid=' + trainingId + '&userid=0195ffae-e288-7eeb-acdb-a121fd12c718', {
+      withCredentials: true,
+    }).subscribe((response) => {
       console.log('Unsubscribed from training:', response);
       this.getTrainings(); // Refresh the trainings after unsubscribing
     });

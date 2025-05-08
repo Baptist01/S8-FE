@@ -1,37 +1,34 @@
 /// <reference types="cypress" />
-// ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+
+declare namespace Cypress {
+  interface Chainable {
+    /**
+     * Custom command to log in a user.
+     * @param email - The user's email address.
+     * @param password - The user's password.
+     */
+    login(email: string, password: string): Chainable<void>;
+  }
+}
+
+Cypress.Commands.add('login', (email, password) => {
+  cy.visit('/');
+
+  cy.get('button.lg\\:hidden').click();
+
+  cy.get('a').contains('login').click();
+
+  // Fill in the login form
+  cy.origin(
+    'http://localhost:9011/oauth2/',
+    { args: { email, password } },
+    ({ email, password }) => {
+      cy.get('input#loginId').type(email);
+      cy.get('input#password').type(password);
+
+      // Click the login button
+      cy.get('button.blue.button').click();
+    },
+  );
+  cy.url().should('include', '/profile');
+});

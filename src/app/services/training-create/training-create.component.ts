@@ -56,7 +56,9 @@ export class TrainingCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get(environment.api.url + '/users').subscribe(
+    this.http.get(environment.api.url + '/users', {
+      withCredentials: true,
+    }).subscribe(
       (response: any) => {
         this.users = response;
         this.filteredUsers = response;

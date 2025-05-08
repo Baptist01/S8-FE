@@ -41,7 +41,9 @@ export class AgendaComponent {
   }
 
   getTrainings(): void {
-    this.http.get<any[]>(environment.api.url + '/trainings').subscribe((response) => {
+    this.http.get<any[]>(environment.api.url + '/trainings', {
+      withCredentials: true,
+    }).subscribe((response) => {
       this.trainings = response;
 
       // Group trainings by date

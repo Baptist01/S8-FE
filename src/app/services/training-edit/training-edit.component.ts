@@ -61,7 +61,9 @@ export class TrainingEditComponent implements OnInit {
     const trainingId = this.route.snapshot.paramMap.get('id');
     if (trainingId) {
       this.http
-        .get(`${environment.api.url}/trainings/${trainingId}`)
+        .get(`${environment.api.url}/trainings/${trainingId}`, {
+          withCredentials: true,
+        })
         .subscribe((training: any) => {
           this.trainingForm.patchValue(training);
           this.trainingForm.value.id = training.id;

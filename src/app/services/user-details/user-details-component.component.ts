@@ -55,14 +55,18 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.http
-      .get<any[]>(environment.api.url + '/users/admin/' + this.id)
+      .get<any[]>(environment.api.url + '/users/admin/' + this.id, {
+        withCredentials: true,
+      })
       .subscribe((data) => {
         this.user = data;
       });
   }
 
   deleteUser(): void {
-    this.http.delete(environment.api.url + '/users/' + this.id).subscribe();
+    this.http.delete(environment.api.url + '/users/' + this.id, {
+      withCredentials: true,
+    }).subscribe();
 
     this.router.navigate(['/users']);
   }

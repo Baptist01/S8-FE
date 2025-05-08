@@ -34,7 +34,9 @@ export class UserCreateComponent implements OnInit {
 
   onSubmit(): void {
     if (this.userForm.valid) {
-      this.http.post(environment.api.url + '/users', this.userForm.value)
+      this.http.post(environment.api.url + '/users', this.userForm.value, {
+        withCredentials: true,
+      })
         .subscribe(response => {
           console.log('User added successfully', response);
           // Handle successful response

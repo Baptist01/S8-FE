@@ -37,7 +37,9 @@ export class UserOverviewComponent implements OnInit {
   }
 
   getUsers(): void {
-    this.http.get<any[]>(environment.api.url + '/users')
+    this.http.get<any[]>(environment.api.url + '/users', {
+      withCredentials: true,
+    })
       .subscribe(data => {
         this.users = data;
         this.filteredUsers = [...this.users];
