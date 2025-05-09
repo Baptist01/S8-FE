@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { environment } from 'src/enviroment/enviroment';
+import { FusionAuthService, UserInfo } from '@fusionauth/angular-sdk';
 
 @Component({
   selector: 'app-agenda',
@@ -18,8 +19,9 @@ import { environment } from 'src/enviroment/enviroment';
   templateUrl: './agenda.component.html',
   styleUrl: './agenda.component.css',
 })
-export class AgendaComponent {
+export class AgendaComponent implements OnInit {
   @ViewChild('scrollableContainer') scrollableContainer!: ElementRef;
+  userInfo: UserInfo | null = null;
 
   trainings: any[] = [];
   paginatedTrainings: any[] = [];
@@ -35,9 +37,18 @@ export class AgendaComponent {
   constructor(
     private http: HttpClient,
     private router: Router,
+    private fusionAuthService: FusionAuthService,
   ) {}
+
   ngOnInit(): void {
     this.getTrainings();
+
+    if (this.fusionAuthService.isLoggedIn()) {
+      this.fusionAuthService.getUserInfoObservable().subscribe({
+        next: (info) => (this.userInfo = info),
+        error: (err) => console.error('Error fetching user info:', err),
+      });
+    }
   }
 
   getTrainings(): void {

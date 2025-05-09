@@ -97,6 +97,7 @@ export class TrainingCreateComponent implements OnInit {
         .post<TrainingResponse>(
           environment.api.url + '/trainings',
           this.trainingForm.value,
+          { withCredentials: true },
         )
         .subscribe(
           (response) => {
@@ -110,7 +111,9 @@ export class TrainingCreateComponent implements OnInit {
                 roleId: 1, // Role ID for participants
               };
               this.http
-                .post(environment.api.url + '/trainings/addUser', payload)
+                .post(environment.api.url + '/trainings/addUser', payload, {
+                  withCredentials: true,
+                })
                 .subscribe(
                   (addUserResponse) => {
                     console.log(
@@ -137,7 +140,9 @@ export class TrainingCreateComponent implements OnInit {
                 roleId: 2,
               };
               this.http
-                .post(environment.api.url + '/trainings/addUser', payload)
+                .post(environment.api.url + '/trainings/addUser', payload, {
+                  withCredentials: true,
+                })
                 .subscribe(
                   (addTrainerResponse) => {
                     console.log(
@@ -206,6 +211,7 @@ export class TrainingCreateComponent implements OnInit {
       '22:30:00',
       '23:00:00',
       '23:30:00',
+      '23:59:00',
     ];
   }
 }

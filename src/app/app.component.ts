@@ -1,12 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-// import { Subscription } from 'rxjs';
-// import { environment } from '../enviroment/enviroment';
-// import { authCodeFlowConfig } from './auth-guard';
-// import { AuthService } from './auth-guard-service';
 import { environment } from 'src/enviroment/enviroment';
 import { FusionAuthService, UserInfo } from '@fusionauth/angular-sdk';
 import { Subscription } from 'rxjs';
-
 
 @Component({
   selector: 'app-root',
@@ -22,7 +17,6 @@ export class AppComponent implements OnInit, OnDestroy {
   isGettingUserInfo: boolean = false;
   subscription?: Subscription;
   userId: string | null = null;
-  // public isLoggedIn: boolean = false;
 
   ngOnInit(): void {
     if (this.isLoggedIn) {
@@ -32,10 +26,14 @@ export class AppComponent implements OnInit, OnDestroy {
           onDone: () => (this.isGettingUserInfo = false),
         })
         .subscribe({
-          next: (userInfo) => (this.userInfo = userInfo),
+          next: (userInfo) => {
+        this.userInfo = userInfo;
+        console.log('UserInfo:', this.userInfo);
+          },
           error: (error) => console.error(error),
         });
     }
+    console.log(this.userInfo);
   }
 
   ngOnDestroy(): void {
@@ -43,18 +41,12 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   login() {
-    console.log('login');
     this.fusionAuthService.startLogin();
   }
 
   logout() {
     this.fusionAuthService.logout();
   }
-
-  isAdmin: boolean = true;
-  isHeadCoach: boolean = true;
-  isTrainer: boolean = true;
-  isSporter: boolean = true;
 
   isMenuOpen = false;
 

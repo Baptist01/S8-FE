@@ -62,8 +62,8 @@
           </li>
           <li>
             <a
-              *ngIf="isLoggedIn && isTrainer"
-              href="/agenda"
+              *ngIf="isLoggedIn  && (userInfo?.role === 'admin' || userInfo?.role === 'trainer' || userInfo?.role === 'headcoach')"
+              href="/agenda-trainers"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2"
               >Trainer Agenda</a
             >
@@ -71,14 +71,14 @@
           <li>
             <a
               *ngIf="isLoggedIn"
-              href="/agenda-users"
+              href="/agenda"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2"
               >Agenda</a
             >
           </li>
           <li>
             <a
-              *ngIf="isLoggedIn && isAdmin"
+              *ngIf="isLoggedIn && userInfo?.role === 'admin'"
               href="/users"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2"
               >Users Overview</a
