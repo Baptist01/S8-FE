@@ -1,7 +1,7 @@
 <section class="pt-28">
   <span class="mx-16">
     <div class="flex items-center justify-between mx-12">
-      <div *ngIf="userInfo?.role === 'admin' || userInfo?.role === 'headcoach'" class="add-button">
+      <div *ngIf="userInfo?.roles?.includes('admin') || userInfo?.roles?.includes('headcoach')" class="add-button">
         <a href="/training/create" class="btn btn-primary">Add Training</a>
       </div>
       <h1 class="text-3xl font-semibold mx-3 text-center">Agenda</h1>
