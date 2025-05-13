@@ -38,7 +38,6 @@ import { VacationUserDetailsComponent } from './components/user-details/vacation
 import { WorkingHoursUserDetailsComponent } from './components/user-details/working-hours-user-details/working-hours-user-details.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { OAuthModule } from 'angular-oauth2-oidc';
 import { TitleComponent } from './components/title/title.component';
 import { environment } from 'src/enviroment/enviroment';
 import { FusionAuthModule } from '@fusionauth/angular-sdk';
@@ -86,7 +85,6 @@ import { FusionAuthModule } from '@fusionauth/angular-sdk';
     ContactFormComponent,
     MatPaginatorModule,
     MatSidenavModule,
-    OAuthModule.forRoot(),
     FusionAuthModule.forRoot({
       clientId: environment.auth.clientId, 
       serverUrl: environment.auth.serverUrl, 
