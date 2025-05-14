@@ -61,7 +61,13 @@ export class MedicineUserDetailsComponent {
           endDate: '1999-01-01',
         });
         this.http
-          .post(environment.api.url + '/users/medicine/', this.medicineForm.value)
+          .post(
+            environment.api.url + '/users/medicine/',
+            this.medicineForm.value,
+            {
+              withCredentials: true,
+            },
+          )
           .subscribe();
         this.medicin.push(this.medicineForm.value);
         this.showAddMedicineForm = false;
@@ -69,7 +75,9 @@ export class MedicineUserDetailsComponent {
       } else {
         const newMedicine = this.medicineForm.value;
         this.http
-          .post(environment.api.url + '/users/medicine/', newMedicine)
+          .post(environment.api.url + '/users/medicine/', newMedicine, {
+            withCredentials: true,
+          })
           .subscribe();
         this.medicin.push(newMedicine);
         this.showAddMedicineForm = false;
@@ -93,6 +101,9 @@ export class MedicineUserDetailsComponent {
         .put(
           environment.api.url + `/users/medicine/${medicineId}`,
           updatedMedicine,
+          {
+            withCredentials: true,
+          },
         )
         .subscribe(() => {
           if (this.editingMedicineIndex !== null) {
@@ -112,7 +123,9 @@ export class MedicineUserDetailsComponent {
   onDeleteMedicine(index: number): void {
     const medicineId = this.medicin[index].id;
     this.http
-      .delete(environment.api.url + `/users/medicine/${medicineId}`)
+      .delete(environment.api.url + `/users/medicine/${medicineId}`, {
+        withCredentials: true,
+      })
       .subscribe(() => {
         this.medicin.splice(index, 1);
       });

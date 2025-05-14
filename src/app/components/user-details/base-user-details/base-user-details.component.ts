@@ -61,7 +61,9 @@ export class BaseUserDetailsComponent {
       const updatedUser = this.userForm.value;
 
       this.http
-        .put(environment.api.url + `/users/${this.user.id}`, updatedUser)
+        .put(environment.api.url + `/users/${this.user.id}`, updatedUser, {
+        withCredentials: true,
+      })
         .subscribe(() => {
           if (this.editingUserIndex !== null) {
             this.user[this.editingUserIndex] = updatedUser;

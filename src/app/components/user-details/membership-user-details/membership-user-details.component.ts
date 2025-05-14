@@ -75,6 +75,9 @@ export class MembershipUserDetailsComponent {
         .put(
           environment.api.url + `/users/membership/${membershipId}`,
           updatedMembership,
+          {
+            withCredentials: true,
+          },
         )
         .subscribe(() => {
           // Update the local user object
@@ -95,7 +98,9 @@ export class MembershipUserDetailsComponent {
   onDeleteMembership(index: number): void {
     const membershipId = this.memberships[index].id;
     this.http
-      .delete(environment.api.url + `/users/membership/${membershipId}`)
+      .delete(environment.api.url + `/users/membership/${membershipId}`, {
+        withCredentials: true,
+      })
       .subscribe(() => {
         this.memberships.splice(index, 1);
       });

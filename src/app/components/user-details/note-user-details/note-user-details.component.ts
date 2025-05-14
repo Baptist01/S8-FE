@@ -48,7 +48,11 @@ export class NoteUserDetailsComponent {
     this.noteForm.value.userId = this.userId;
     if (this.noteForm.valid) {
       const newNote = this.noteForm.value;
-      this.http.post(environment.api.url + '/users/note/', newNote).subscribe();
+      this.http
+        .post(environment.api.url + '/users/note/', newNote, {
+          withCredentials: true,
+        })
+        .subscribe();
       this.notes.push(newNote);
       this.showAddNoteForm = false;
       this.noteForm.reset();
@@ -64,10 +68,12 @@ export class NoteUserDetailsComponent {
   onUpdateNote(): void {
     if (this.noteForm.valid && this.editingNoteIndex !== null) {
       const updatedNote = this.noteForm.value;
-      const noteId = this.notes[this.editingNoteIndex].id; 
+      const noteId = this.notes[this.editingNoteIndex].id;
 
       this.http
-        .put(environment.api.url + `/users/note/${noteId}`, updatedNote)
+        .put(environment.api.url + `/users/note/${noteId}`, updatedNote, {
+          withCredentials: true,
+        })
         .subscribe(() => {
           // Update the local user object
           if (this.editingNoteIndex !== null) {
@@ -87,7 +93,9 @@ export class NoteUserDetailsComponent {
   onDeleteNote(index: number): void {
     const noteId = this.notes[index].id;
     this.http
-      .delete(environment.api.url + `/users/note/${noteId}`)
+      .delete(environment.api.url + `/users/note/${noteId}`, {
+        withCredentials: true,
+      })
       .subscribe(() => {
         this.notes.splice(index, 1);
       });

@@ -66,7 +66,13 @@ export class AdresUserDetailsComponent {
       const addressId = this.adresses[this.editingAddressIndex].id;
 
       this.http
-        .put(environment.api.url + `/users/adress/${addressId}`, updatedAddress)
+        .put(
+          environment.api.url + `/users/adress/${addressId}`,
+          updatedAddress,
+          {
+            withCredentials: true,
+          },
+        )
         .subscribe(() => {
           // Update the local user object
           if (this.editingAddressIndex !== null) {
@@ -86,7 +92,9 @@ export class AdresUserDetailsComponent {
   onDeleteAddress(index: number): void {
     const addressId = this.adresses[index].id;
     this.http
-      .delete(environment.api.url + `/users/adress/${addressId}`)
+      .delete(environment.api.url + `/users/adress/${addressId}`, {
+        withCredentials: true,
+      })
       .subscribe(() => {
         this.adresses.splice(index, 1);
       });
@@ -99,7 +107,9 @@ export class AdresUserDetailsComponent {
     if (this.addressForm.valid) {
       const newAddress = this.addressForm.value;
       this.http
-        .post(environment.api.url + '/users/adress/', newAddress)
+        .post(environment.api.url + '/users/adress/', newAddress, {
+          withCredentials: true,
+        })
         .subscribe();
       this.adresses.push(newAddress);
       this.showAddAddressForm = false;

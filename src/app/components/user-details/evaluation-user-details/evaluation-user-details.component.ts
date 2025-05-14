@@ -52,7 +52,9 @@ export class EvaluationUserDetailsComponent {
     if (this.evaluationForm.valid) {
       const newEvaluation = this.evaluationForm.value;
       this.http
-        .post(environment.api.url + '/users/evaluation/', newEvaluation)
+        .post(environment.api.url + '/users/evaluation/', newEvaluation, {
+        withCredentials: true,
+      })
         .subscribe();
       this.evaluations.push(newEvaluation);
       this.showAddEvaluationForm = false;
@@ -75,6 +77,9 @@ export class EvaluationUserDetailsComponent {
         .put(
           environment.api.url + `/users/evaluation/${evaluationId}`,
           updatedEvaluation,
+          {
+            withCredentials: true,
+          }
         )
         .subscribe(() => {
           if (this.editingEvaluationIndex !== null) {
@@ -94,7 +99,9 @@ export class EvaluationUserDetailsComponent {
   onDeleteEvaluation(index: number): void {
     const evaluationId = this.evaluations[index].id;
     this.http
-      .delete(environment.api.url + `/users/evaluation/${evaluationId}`)
+      .delete(environment.api.url + `/users/evaluation/${evaluationId}`, {
+        withCredentials: true,
+      })
       .subscribe(() => {
         this.evaluations.splice(index, 1);
       });

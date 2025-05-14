@@ -53,7 +53,9 @@ export class ChildrenUserDetailsComponent {
         noChild.name = 'No Child';
         noChild.birthDate = '1999-01-01';
         this.http
-          .post(environment.api.url + '/users/child/', noChild)
+          .post(environment.api.url + '/users/child/', noChild, {
+            withCredentials: true,
+          })
           .subscribe();
         this.children.push(noChild);
         this.showAddChildForm = false;
@@ -61,7 +63,9 @@ export class ChildrenUserDetailsComponent {
       } else {
         const newChild = this.childForm.value;
         this.http
-          .post(environment.api.url + '/users/child/', newChild)
+          .post(environment.api.url + '/users/child/', newChild, {
+            withCredentials: true,
+          })
           .subscribe();
         this.children.push(newChild);
         this.showAddChildForm = false;
@@ -82,7 +86,9 @@ export class ChildrenUserDetailsComponent {
       const childId = this.children[this.editingChildIndex].id;
 
       this.http
-        .put(environment.api.url + `/users/child/${childId}`, updatedChild)
+        .put(environment.api.url + `/users/child/${childId}`, updatedChild, {
+          withCredentials: true,
+        })
         .subscribe(() => {
           if (this.editingChildIndex !== null) {
             this.children[this.editingChildIndex] = updatedChild;
@@ -101,7 +107,9 @@ export class ChildrenUserDetailsComponent {
   onDeleteChild(index: number): void {
     const childId = this.children[index].id;
     this.http
-      .delete(environment.api.url + `/users/child/${childId}`)
+      .delete(environment.api.url + `/users/child/${childId}`, {
+        withCredentials: true,
+      })
       .subscribe(() => {
         this.children.splice(index, 1);
       });

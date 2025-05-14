@@ -57,7 +57,13 @@ export class VacationUserDetailsComponent {
           description: 'No vacation',
         });
         this.http
-          .post(environment.api.url + '/users/vacation/', this.vacationForm.value)
+          .post(
+            environment.api.url + '/users/vacation/',
+            this.vacationForm.value,
+            {
+              withCredentials: true,
+            },
+          )
           .subscribe();
         this.vacations.push(this.vacationForm.value);
         this.showAddVacationForm = false;
@@ -65,7 +71,9 @@ export class VacationUserDetailsComponent {
       } else {
         const newVacation = this.vacationForm.value;
         this.http
-          .post(environment.api.url + '/users/vacation/', newVacation)
+          .post(environment.api.url + '/users/vacation/', newVacation, {
+            withCredentials: true,
+          })
           .subscribe();
         this.vacations.push(newVacation);
         this.showAddVacationForm = false;
@@ -89,6 +97,9 @@ export class VacationUserDetailsComponent {
         .put(
           environment.api.url + `/users/vacation/${vacationId}`,
           updatedVacation,
+          {
+            withCredentials: true,
+          },
         )
         .subscribe(() => {
           // Update the local user object
@@ -109,7 +120,9 @@ export class VacationUserDetailsComponent {
   onDeleteVacation(index: number): void {
     const vacationId = this.vacations[index].id;
     this.http
-      .delete(environment.api.url + `/users/vacation/${vacationId}`)
+      .delete(environment.api.url + `/users/vacation/${vacationId}`, {
+        withCredentials: true,
+      })
       .subscribe(() => {
         this.vacations.splice(index, 1);
       });

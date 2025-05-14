@@ -60,6 +60,9 @@ export class WorkingHoursUserDetailsComponent {
         .put(
           environment.api.url + `/users/workhour/${workingHourId}`,
           updatedWorkingHour,
+          {
+            withCredentials: true,
+          },
         )
         .subscribe(() => {
           if (this.editingWorkingHoursIndex !== null) {
@@ -80,7 +83,9 @@ export class WorkingHoursUserDetailsComponent {
   onDeleteWorkingHours(index: number): void {
     const workingHourId = this.workingHours[index].id;
     this.http
-      .delete(environment.api.url + `/users/workhour/${workingHourId}`)
+      .delete(environment.api.url + `/users/workhour/${workingHourId}`, {
+        withCredentials: true,
+      })
       .subscribe(() => {
         this.workingHours.splice(index, 1);
       });
@@ -92,7 +97,9 @@ export class WorkingHoursUserDetailsComponent {
     if (this.workingHoursForm.valid) {
       const newWorking = this.workingHoursForm.value;
       this.http
-        .post(environment.api.url + '/users/workhour/', newWorking)
+        .post(environment.api.url + '/users/workhour/', newWorking, {
+          withCredentials: true,
+        })
         .subscribe();
       this.workingHours.push(newWorking);
       this.showAddWorkingHoursForm = false;

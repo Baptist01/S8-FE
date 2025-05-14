@@ -59,19 +59,31 @@ export class PhysicalIssueUserDetailsComponent {
           endDate: '1999-01-01',
         });
         this.http
-        .post(environment.api.url + `/users/physicalissue/`, this.physicalIssueForm.value)
-        .subscribe();
-      this.phisicalIssues.push(this.physicalIssueForm.value);
-      this.showAddPhysicalIssueForm = false;
-      this.physicalIssueForm.reset();
+          .post(
+            environment.api.url + `/users/physicalissue/`,
+            this.physicalIssueForm.value,
+            {
+              withCredentials: true,
+            },
+          )
+          .subscribe();
+        this.phisicalIssues.push(this.physicalIssueForm.value);
+        this.showAddPhysicalIssueForm = false;
+        this.physicalIssueForm.reset();
       } else {
         const newPhysicalIssue = this.physicalIssueForm.value;
         this.http
-        .post(environment.api.url + `/users/physicalissue/`, newPhysicalIssue)
-        .subscribe();
-      this.phisicalIssues.push(newPhysicalIssue);
-      this.showAddPhysicalIssueForm = false;
-      this.physicalIssueForm.reset();
+          .post(
+            environment.api.url + `/users/physicalissue/`,
+            newPhysicalIssue,
+            {
+              withCredentials: true,
+            },
+          )
+          .subscribe();
+        this.phisicalIssues.push(newPhysicalIssue);
+        this.showAddPhysicalIssueForm = false;
+        this.physicalIssueForm.reset();
       }
     }
   }
@@ -94,6 +106,9 @@ export class PhysicalIssueUserDetailsComponent {
         .put(
           environment.api.url + `/users/physicalissue/${issueId}`,
           updatedIssue,
+          {
+            withCredentials: true,
+          },
         )
         .subscribe(() => {
           // Update the local user object
@@ -115,7 +130,9 @@ export class PhysicalIssueUserDetailsComponent {
     const issueId = this.phisicalIssues[index].id;
 
     this.http
-      .delete(environment.api.url + `/users/physicalissue/${issueId}`)
+      .delete(environment.api.url + `/users/physicalissue/${issueId}`, {
+        withCredentials: true,
+      })
       .subscribe(() => {
         this.phisicalIssues.splice(index, 1);
       });
