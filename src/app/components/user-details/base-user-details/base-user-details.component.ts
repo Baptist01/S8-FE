@@ -42,7 +42,7 @@ export class BaseUserDetailsComponent {
       middleName: [''],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      phoneNumber: ['', Validators.required],
+      phoneNumber: [''],
       birthDate: ['', Validators.required],
       work: [''],
       workActivity: [''],

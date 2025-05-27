@@ -6,59 +6,77 @@
   </span>
 </section>
 
-<div class="user-details-container">
-  <div class="user-details">
-    <app-base-user-details
-      [user]="user"
-      (userUpdated)="user = $event"
-    ></app-base-user-details>
-    <hr />
+<div class="profile-grid-container">
+  <div class="profile-main">
+    <section class="profile-section">
+      <h2 class="section-title">Persoonlijke gegevens</h2>
+      <app-base-user-details
+        [user]="user"
+        (userUpdated)="user = $event"
+      ></app-base-user-details>
+    </section>
 
-    <app-adres-user-details
-      [userId]="user.id"
-      [adresses]="user.adresses"
-      (addressesUpdated)="user.adresses = $event"
-    >
-    </app-adres-user-details>
+    <section class="profile-section">
+      <h2 class="section-title">Fysieke klachten</h2>
+      <app-physical-issue-user-details
+        [userId]="user.id"
+        [phisicalIssues]="user.phisicalIssues"
+        (phisicalIssuesUpdated)="user.phisicalIssues = $event"
+      ></app-physical-issue-user-details>
+    </section>
 
-    <h2 class="text-xl font-semibold my-4">Memberships</h2>
-    <div *ngIf="user.memberships && user.memberships.length">
-      <ul>
-        <li *ngFor="let membership of user.memberships">
-          <p><strong>Is Current:</strong> {{ membership.isCurrent }}</p>
-          <p><strong>Fee:</strong> {{ membership.fee }}</p>
-          <p>
-            <strong>Training Type ID:</strong> {{ membership.trainingTypeId }}
-          </p>
-          <p><strong>Frequency ID:</strong> {{ membership.frequencyId }}</p>
-          <p><strong>Start Date:</strong> {{ membership.startDate }}</p>
-          <hr />
-        </li>
-      </ul>
-    </div>
+    <section class="profile-section">
+      <h2 class="section-title">Medicatie</h2>
+      <app-medicine-user-details
+        [userId]="user.id"
+        [medicin]="user.medicin"
+        (medicinesUpdated)="user.medicin = $event"
+      ></app-medicine-user-details>
+    </section>
+  </div>
 
-    <app-children-user-details
-      [userId]="user.id"
-      [children]="user.children"
-      (childrenUpdated)="user.children = $event"
-    ></app-children-user-details>
+  <div class="profile-side">
+    <section class="profile-section">
+      <h2 class="section-title">Memberships</h2>
+      <div *ngIf="user.memberships && user.memberships.length">
+        <ul>
+          <li *ngFor="let membership of user.memberships">
+            <p><strong>Is Current:</strong> {{ membership.isCurrent }}</p>
+            <p><strong>Fee:</strong> {{ membership.fee }}</p>
+            <p><strong>Training Type ID:</strong> {{ membership.trainingTypeId }}</p>
+            <p><strong>Frequency ID:</strong> {{ membership.frequencyId }}</p>
+            <p><strong>Start Date:</strong> {{ membership.startDate }}</p>
+            <hr />
+          </li>
+        </ul>
+      </div>
+    </section>
 
-    <app-medicine-user-details
-      [userId]="user.id"
-      [medicin]="user.medicin"
-      (medicinesUpdated)="user.medicin = $event"
-    ></app-medicine-user-details>
+    <section class="profile-section">
+      <h2 class="section-title">Adressen</h2>
+      <app-adres-user-details
+        [userId]="user.id"
+        [adresses]="user.adresses"
+        (addressesUpdated)="user.adresses = $event"
+      ></app-adres-user-details>
+    </section>
 
-    <app-physical-issue-user-details
-      [userId]="user.id"
-      [phisicalIssues]="user.phisicalIssues"
-      (phisicalIssuesUpdated)="user.phisicalIssues = $event"
-    ></app-physical-issue-user-details>
+    <section class="profile-section">
+      <h2 class="section-title">Kinderen</h2>
+      <app-children-user-details
+        [userId]="user.id"
+        [children]="user.children"
+        (childrenUpdated)="user.children = $event"
+      ></app-children-user-details>
+    </section>
 
-    <app-vacation-user-details
-      [userId]="user.id"
-      [vacations]="user.vacations"
-      (vacationsUpdated)="user.vacations = $event"
-    ></app-vacation-user-details>
+    <section class="profile-section">
+      <h2 class="section-title">Vakanties</h2>
+      <app-vacation-user-details
+        [userId]="user.id"
+        [vacations]="user.vacations"
+        (vacationsUpdated)="user.vacations = $event"
+      ></app-vacation-user-details>
+    </section>
   </div>
 </div>

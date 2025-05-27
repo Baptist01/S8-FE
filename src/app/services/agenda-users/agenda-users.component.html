@@ -20,7 +20,7 @@
           <tr>
             <th class="name-column">Type training</th>
             <th>Naam</th>
-            <th class="email-column">Omschrijving</th>
+            <th class="email-column">Trainer</th>
             <th>Start tijd</th>
             <th>Eind tijd</th>
             <th>Deelnemers</th>
@@ -30,7 +30,9 @@
           <tr *ngFor="let training of groupedTrainings[date]">
             <td class="name-column">{{ training.type }}</td>
             <td>{{ training.name }}</td>
-            <td class="email-column">{{ training.description }}</td>
+            <td>
+              {{ getTrainerName(training.users) }}
+            </td>
             <td>{{ training.start_time }}</td>
             <td>{{ training.end_time }}</td>
             <td
@@ -46,16 +48,22 @@
             </td>
             <td>{{ training.max_participants }}</td>
             <td>
-              <a
+              <button
                 (click)="subscribeToTraining(training.id)"
-                class="btn btn-primary"
-                >Aanmelden</a
+                class="btn-blue"
+                *ngIf="isUserNotSubscribed(training)"
+                type="button"
               >
-              <a
+                Aanmelden
+              </button>
+              <button
                 (click)="unsubscribeFromTraining(training.id)"
-                class="btn btn-secondary"
-                >Afmelden</a
+                class="btn-red"
+                *ngIf="isUserSubscribed(training)"
+                type="button"
               >
+                Afmelden
+              </button>
             </td>
           </tr>
         </table>

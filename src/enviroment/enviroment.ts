@@ -9,6 +9,6 @@ export const environment = {
     scope: 'openid email profile address phone offline_access claims',
   },
   api: {
-    url: 'http://localhost:8080/api',
+    url: 'http://localhost:8090/api',
   },
 };
