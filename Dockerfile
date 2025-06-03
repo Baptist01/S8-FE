@@ -20,7 +20,7 @@ FROM nginx:alpine
 # Copy Angular build output to Nginx's html directory
 COPY --from=build /app/dist/frontend/browser/ /usr/share/nginx/html
 
-EXPOSE 4200
+EXPOSE 80
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
