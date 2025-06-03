@@ -28,12 +28,10 @@ export class AppComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (userInfo) => {
         this.userInfo = userInfo;
-        console.log('UserInfo:', this.userInfo);
           },
           error: (error) => console.error(error),
         });
     }
-    console.log(this.userInfo);
   }
 
   ngOnDestroy(): void {

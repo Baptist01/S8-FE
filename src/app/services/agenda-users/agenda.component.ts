@@ -168,4 +168,17 @@ export class AgendaUsersComponent {
     const trainer = users?.find((user: any) => user.roleId === 2);
     return trainer ? trainer.firstName : 'Geen trainer';
   }
+
+  canUnsubscribe(training: any): boolean {
+    const start = new Date(`${training.date}T${training.start_time}`);
+    const now = new Date();
+    const diffMs = start.getTime() - now.getTime();
+    const diffHours = diffMs / (1000 * 60 * 60);
+    return diffHours > 18;
+  }
+  canSubscribe(training: any): boolean {
+    const start = new Date(`${training.date}T${training.start_time}`);
+    const now = new Date();
+    return start > now;
+  }
 }

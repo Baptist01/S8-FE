@@ -103,3 +103,10 @@ tr:nth-child(even) {
 .btn-red:hover {
   background-color: #a71d2a;
 }
+
+.btn-red:disabled {
+  background-color: #ccc;
+  color: #888;
+  cursor: not-allowed;
+  border: none;
+}

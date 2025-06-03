@@ -51,7 +51,7 @@
               <button
                 (click)="subscribeToTraining(training.id)"
                 class="btn-blue"
-                *ngIf="isUserNotSubscribed(training)"
+                *ngIf="isUserNotSubscribed(training) && canSubscribe(training)"
                 type="button"
               >
                 Aanmelden
@@ -60,6 +60,7 @@
                 (click)="unsubscribeFromTraining(training.id)"
                 class="btn-red"
                 *ngIf="isUserSubscribed(training)"
+                [disabled]="!canUnsubscribe(training)"
                 type="button"
               >
                 Afmelden

@@ -98,7 +98,7 @@ export class TrainingEditComponent implements OnInit {
         });
     }
 
-    this.http.get(`${environment.api.url}/users`).subscribe((users: any) => {
+    this.http.get(`${environment.api.url}/users`, { withCredentials: true }).subscribe((users: any) => {
       this.users = users;
       this.filteredUsers = users;
     });
@@ -126,9 +126,6 @@ export class TrainingEditComponent implements OnInit {
   onSubmit(): void {
     if (this.trainingForm.valid) {
       const currentFormValue: any = this.trainingForm.value;
-      const trainingId = this.originalFormValue.id;
-
-      console.log('Current form value:', currentFormValue);
 
       const requestBody = {
         id: currentFormValue.id,
@@ -142,7 +139,7 @@ export class TrainingEditComponent implements OnInit {
         max_participants: currentFormValue.max_participants,
         trainer: {
           trainingId: currentFormValue.id,
-          userId: currentFormValue.trainer.userId,
+          userId: currentFormValue.trainer,
           roleId: 2,
         },
         sporter: this.selectedParticipants.map((userId: string) => ({
@@ -156,6 +153,7 @@ export class TrainingEditComponent implements OnInit {
         .put<TrainingResponse>(
           environment.api.url + '/trainings/editTraining',
           requestBody,
+          { withCredentials: true },
         )
         .subscribe(() => {
           this.router.navigate(['/agenda']);
