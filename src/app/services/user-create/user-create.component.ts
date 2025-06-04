@@ -43,26 +43,38 @@ export class UserCreateComponent implements OnInit {
     if (this.userForm.valid) {
       const userData = { ...this.userForm.value };
 
-      if (userData.id === '') {
+      if (!userData.id || userData.id.trim() === '') {
+        // POST to /users, exclude 'id'
         delete userData.id;
+
+        this.http
+          .post(environment.api.url + '/users', userData, {
+            withCredentials: true,
+          })
+          .subscribe(
+            (response) => {
+              console.log('User created successfully', response);
+              this.router.navigate(['/users']);
+            },
+            (error) => {
+              console.error('Error creating user', error);
+            },
+          );
+      } else {
+        this.http
+          .post(environment.api.url + '/users/id', userData, {
+            withCredentials: true,
+          })
+          .subscribe(
+            (response) => {
+              console.log('User updated successfully', response);
+              this.router.navigate(['/users']);
+            },
+            (error) => {
+              console.error('Error updating user', error);
+            },
+          );
       }
-
-      this.http
-        .post(environment.api.url + '/users', userData, {
-          withCredentials: true,
-        })
-        .subscribe(
-          (response) => {
-            console.log('User added successfully', response);
-            // Handle successful response
-          },
-          (error) => {
-            console.error('Error adding user', error);
-            // Handle error response
-          },
-        );
-
-      this.router.navigate(['/users']);
     }
   }
 }
