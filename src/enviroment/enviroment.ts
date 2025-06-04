@@ -8,6 +8,6 @@ export const environment = {
     scope: 'openid email profile offline_access',
   },
   api: {
-    url: 'http://localhost:8080/api',
+    url: 'https://api.thecoderoomprivate/api',
   },
 };
