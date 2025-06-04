@@ -60,33 +60,29 @@
               >Contact</a
             >
           </li>
-          <li>
+          <li *ngIf="isLoggedIn  && (userInfo?.roles?.includes('admin') || userInfo?.roles?.includes('trainer') || userInfo?.roles?.includes('headcoach'))">
             <a
-              *ngIf="isLoggedIn  && (userInfo?.roles?.includes('admin') || userInfo?.roles?.includes('trainer') || userInfo?.roles?.includes('headcoach'))"
               href="/agenda-trainers"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2"
               >Trainer Agenda</a
             >
           </li>
-          <li>
+          <li *ngIf="isLoggedIn">
             <a
-              *ngIf="isLoggedIn"
               href="/agenda"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2"
               >Agenda</a
             >
           </li>
-          <li>
+          <li *ngIf="isLoggedIn && userInfo?.roles?.includes('admin')">
             <a
-              *ngIf="isLoggedIn && userInfo?.roles?.includes('admin')"
               href="/users"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2"
               >Users Overview</a
             >
           </li>
-          <li>
+          <li *ngIf="isLoggedIn">
             <a
-              *ngIf="isLoggedIn"
               href="/profile"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2"
               >Profile</a
