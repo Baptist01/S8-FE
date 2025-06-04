@@ -20,7 +20,9 @@ FROM nginx:alpine
 # Copy Angular build output to Nginx's html directory
 COPY --from=build /app/dist/frontend/browser/ /usr/share/nginx/html
 
-COPY nginx.conf /etc/nginx/nginx.conf
+# COPY  ngix file nginx.conf /etc/nginx/default.conf
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+
 
 EXPOSE 80
 
