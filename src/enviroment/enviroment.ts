@@ -4,7 +4,7 @@ export const environment = {
   auth: {
     clientId: 'fab9c0df-a37b-4b41-864f-5fbe3b3b2f38',
     serverUrl: 'https://auth.thecoderoomprivate.com/',
-    redirectUri: 'https://auth.thecoderoomprivate.com/callback',
+    redirectUri: 'https://thecoderoomprivate.com/callback',
     scope: 'openid email profile offline_access',
   },
   api: {
