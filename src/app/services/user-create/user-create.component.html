@@ -2,6 +2,10 @@
     <div class="user-details">
         <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
             <div>
+                <label for="id"><strong>Id:</strong></label>
+                <input id="id" formControlName="id" type="text">
+            </div>
+            <div>
                 <label for="firstName"><strong>First Name:</strong></label>
                 <input id="firstName" formControlName="firstName" type="text">
             </div>

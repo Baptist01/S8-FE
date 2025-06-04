@@ -1,22 +1,29 @@
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { environment } from 'src/enviroment/enviroment';
 
 @Component({
   selector: 'app-user-create',
-  imports: [
-    ReactiveFormsModule,
-  ],
+  imports: [ReactiveFormsModule],
   templateUrl: './user-create.component.html',
-  styleUrl: './user-create.component.css'
+  styleUrl: './user-create.component.css',
 })
-
 export class UserCreateComponent implements OnInit {
   userForm: FormGroup;
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private router: Router,
+  ) {
     this.userForm = this.fb.group({
+      id: [''],
       firstName: ['', Validators.required],
       middleName: [''],
       lastName: ['', Validators.required],
@@ -26,7 +33,7 @@ export class UserCreateComponent implements OnInit {
       work: [''],
       workActivities: [''],
       smoking: [''],
-      drinking: ['']
+      drinking: [''],
     });
   }
 
@@ -34,18 +41,28 @@ export class UserCreateComponent implements OnInit {
 
   onSubmit(): void {
     if (this.userForm.valid) {
-      this.http.post(environment.api.url + '/users', this.userForm.value, {
-        withCredentials: true,
-      })
-        .subscribe(response => {
-          console.log('User added successfully', response);
-          // Handle successful response
-        }, error => {
-          console.error('Error adding user', error);
-          // Handle error response
-        });
-    }
+      const userData = { ...this.userForm.value };
 
-    this.router.navigate(['/users']);
+      if (userData.id === '') {
+        delete userData.id;
+      }
+
+      this.http
+        .post(environment.api.url + '/users', userData, {
+          withCredentials: true,
+        })
+        .subscribe(
+          (response) => {
+            console.log('User added successfully', response);
+            // Handle successful response
+          },
+          (error) => {
+            console.error('Error adding user', error);
+            // Handle error response
+          },
+        );
+
+      this.router.navigate(['/users']);
+    }
   }
 }
