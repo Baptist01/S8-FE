@@ -42,6 +42,6 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.AZURE_VM_USERNAME }}@${{ secrets.AZURE_VM_IP }} << EOF
             docker image rm -f $IMAGE_NAME:latest || true
             cd ~/setup
-            docker-compose pull api
-            docker-compose up -d --remove-orphans api
+            docker-compose pull frontend
+            docker-compose up -d frontend
           EOF
