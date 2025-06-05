@@ -30,3 +30,18 @@ jobs:
       - name: Push Docker image
         run: |
           docker push $IMAGE_NAME:latest
+
+      - name: Set up SSH key and agent
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.AZURE_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Deploy to Azure VM
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.AZURE_VM_USERNAME }}@${{ secrets.AZURE_VM_IP }} << EOF
+            docker image rm -f $IMAGE_NAME:latest || true
+            cd ~/setup
+            docker-compose pull api
+            docker-compose up -d --remove-orphans api
+          EOF
