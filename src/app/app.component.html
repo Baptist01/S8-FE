@@ -1,7 +1,7 @@
 <header class="fixed w-full bg-white h-28 shadow-md z-50">
   <nav>
     <div
-      class="flex flex-wrap items-center justify-between max-w-screen-2xl px-5 mx-auto"
+      class="flex flex-wrap items-center justify-between max-w-screen-xl px-5 mx-auto"
     >
       <a href="/" class="flex items-center">
         <img
@@ -12,18 +12,18 @@
           priority
         />
       </a>
-      <button class="xl:hidden" (click)="toggleMenu()">
+      <button class="lg:hidden" (click)="toggleMenu()">
         <mat-icon>menu</mat-icon>
       </button>
       <div
         [ngClass]="{
-          'xl:flex items-center justify-between w-full xl:w-auto lf-order-1': true,
+          'lg:flex items-center w-full lg:w-auto lf-order-1': true,
           hidden: !isMenuOpen,
         }"
       >
         <ul
-          class="flex flex-col xl:flex-row xl:space-x-6 font-medium bg-white rounded"
-        >
+          class="flex flex-col lg:flex-row lg:space-x-6 font-medium bg-white rounded lg:-ml-8"
+          >
           <li class="">
             <a
               href="/"
@@ -36,6 +36,7 @@
             <a
               href="/personal-training"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2"
+              style="margin-left: -1rem;"
               >Personal training</a
             >
           </li>
@@ -43,6 +44,7 @@
             <a
               href="/professional-personal-training"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2"
+              style="margin-left: -1rem;"
               >Professional personal training</a
             >
           </li>
@@ -50,6 +52,7 @@
             <a
               href="/over-ons"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2"
+              style="margin-left: -1rem;"
               >Over ons</a
             >
           </li>
@@ -57,6 +60,7 @@
             <a
               href="/contact"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2"
+              style="margin-left: -1rem;"
               >Contact</a
             >
           </li>
@@ -64,6 +68,7 @@
             <a
               href="/agenda-trainers"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2"
+              style="margin-left: -1rem;"
               >Trainer Agenda</a
             >
           </li>
@@ -71,6 +76,7 @@
             <a
               href="/agenda"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2"
+              style="margin-left: -1rem;"
               >Agenda</a
             >
           </li>
@@ -78,6 +84,7 @@
             <a
               href="/users"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2"
+              style="margin-left: -1rem;"
               >Users Overview</a
             >
           </li>
@@ -85,6 +92,7 @@
             <a
               href="/profile"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2"
+              style="margin-left: -1rem;"
               >Profile</a
             >
           </li>
@@ -93,12 +101,14 @@
               *ngIf="isLoggedIn"
               (click)="logout()"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2 cursor-pointer"
+              style="margin-left: -1rem;"
               >logout</a
             >
             <a
               *ngIf="!isLoggedIn"
               (click)="login()"
               class="text-black hover:bg-gray-100 rounded block px-2 py-2 cursor-pointer"
+              style="margin-left: -1rem;"
               >login</a
             >
           </li>
