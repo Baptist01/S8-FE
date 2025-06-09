@@ -20,7 +20,6 @@ jobs:
       - name: Designite Incremental Code Quality Analysis
         uses: DesigniteTools/designite-incremental-analysis@v2.1.0
         with:
-        # GitHub token created during workflow execution (Set to Read and Write)
           github-token: Read and Write
           designite-output-old: ./.github/workflow/oldresults
           designite-output-new: ./.github/workflow/result
