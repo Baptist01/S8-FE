@@ -27,7 +27,7 @@
           <li class="">
             <a
               href="/"
-              class="text-black hover:bg-gray-100 rounded block px-2 py-2"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2 lg:-ml-4"
               >Home</a
             >
           </li>
@@ -35,64 +35,56 @@
           <li>
             <a
               href="/personal-training"
-              class="text-black hover:bg-gray-100 rounded block px-2 py-2"
-              style="margin-left: -1rem;"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2 lg:-ml-4"
               >Personal training</a
             >
           </li>
           <li>
             <a
               href="/professional-personal-training"
-              class="text-black hover:bg-gray-100 rounded block px-2 py-2"
-              style="margin-left: -1rem;"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2 lg:-ml-4"
               >Professional personal training</a
             >
           </li>
           <li>
             <a
               href="/over-ons"
-              class="text-black hover:bg-gray-100 rounded block px-2 py-2"
-              style="margin-left: -1rem;"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2 lg:-ml-4"
               >Over ons</a
             >
           </li>
           <li>
             <a
               href="/contact"
-              class="text-black hover:bg-gray-100 rounded block px-2 py-2"
-              style="margin-left: -1rem;"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2 lg:-ml-4"
               >Contact</a
             >
           </li>
           <li *ngIf="isLoggedIn  && (userInfo?.roles?.includes('admin') || userInfo?.roles?.includes('trainer') || userInfo?.roles?.includes('headcoach'))">
             <a
               href="/agenda-trainers"
-              class="text-black hover:bg-gray-100 rounded block px-2 py-2"
-              style="margin-left: -1rem;"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2 lg:-ml-4"
               >Trainer Agenda</a
             >
           </li>
           <li *ngIf="isLoggedIn">
             <a
               href="/agenda"
-              class="text-black hover:bg-gray-100 rounded block px-2 py-2"
-              style="margin-left: -1rem;"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2 lg:-ml-4"
               >Agenda</a
             >
           </li>
           <li *ngIf="isLoggedIn && userInfo?.roles?.includes('admin')">
             <a
               href="/users"
-              class="text-black hover:bg-gray-100 rounded block px-2 py-2"
-              style="margin-left: -1rem;"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2 lg:-ml-4"
               >Users Overview</a
             >
           </li>
           <li *ngIf="isLoggedIn">
             <a
               href="/profile"
-              class="text-black hover:bg-gray-100 rounded block px-2 py-2"
-              style="margin-left: -1rem;"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2 lg:-ml-4"
               >Profile</a
             >
           </li>
@@ -100,15 +92,13 @@
             <a
               *ngIf="isLoggedIn"
               (click)="logout()"
-              class="text-black hover:bg-gray-100 rounded block px-2 py-2 cursor-pointer"
-              style="margin-left: -1rem;"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2 cursor-pointer lg:-ml-4"
               >logout</a
             >
             <a
               *ngIf="!isLoggedIn"
               (click)="login()"
-              class="text-black hover:bg-gray-100 rounded block px-2 py-2 cursor-pointer"
-              style="margin-left: -1rem;"
+              class="text-black hover:bg-gray-100 rounded block px-2 py-2 cursor-pointer lg:-ml-4"
               >login</a
             >
           </li>
