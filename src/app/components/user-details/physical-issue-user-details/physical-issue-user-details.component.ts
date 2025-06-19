@@ -5,7 +5,6 @@ import {
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
-  Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -30,6 +29,7 @@ export class PhysicalIssueUserDetailsComponent {
   @Input() phisicalIssues: any[] = [];
   @Input() userId: string = '';
   @Output() physicalIssueUpdated = new EventEmitter<any>();
+
   showAddPhysicalIssueForm = false;
   physicalIssueForm: FormGroup;
   editingPhysicalIssueIndex: number | null = null;
@@ -38,7 +38,7 @@ export class PhysicalIssueUserDetailsComponent {
     private http: HttpClient,
   ) {
     this.physicalIssueForm = this.fb.group({
-      notRelevant: [Boolean],
+      notRelevant: ['No issue'],
       userId: [''],
       name: [''],
       description: [''],
@@ -50,7 +50,7 @@ export class PhysicalIssueUserDetailsComponent {
   onAddPhysicalIssue(): void {
     this.physicalIssueForm.value.userId = this.userId;
     if (this.physicalIssueForm.valid) {
-      if (this.physicalIssueForm.value.notRelevant) {
+      if (this.physicalIssueForm.value.notRelevant === 'No issue') {
         this.physicalIssueForm.patchValue({
           userId: this.userId,
           name: 'No issue',
