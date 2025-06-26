@@ -46,11 +46,19 @@
             </td>
             <td>{{ training.max_participants }}</td>
             <td>
-              <a
+              <button
+                [routerLink]="['/training/edit', training.id]"
+                class="btn-blue"
+                type="button"
+                >
+                Edit
+                </button>
+              <!-- <a
                 [href]="'/training/edit/' + training.id"
                 class="btn btn-primary"
                 >Edit</a
-              >
+              > -->
+              
             </td>
           </tr>
         </table>
