@@ -1,20 +1,90 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# S8-FE
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+Angular Front-End Application – Graduation Project
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+## Overview
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+S8-FE is a modern web application built with Angular and TypeScript. This repository contains the complete client-side implementation of the project, including configuration, testing setup, and build infrastructure.
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+The application is designed with scalability, maintainability, and clear separation of concerns in mind. It serves as the front-end layer that integrates with corresponding backend services.
+
+## Features
+
+- Responsive and structured user interface built with Angular
+- Modular architecture for maintainability and extension
+- End-to-end testing with Cypress
+- Docker support for containerized deployment
+- Structured project configuration for development and production environments
+
+## Technology Stack
+
+- Angular
+- TypeScript
+- Cypress
+- Docker
+- Tailwind CSS (if applicable)
+
+## Installation
+
+### Prerequisites
+
+- Node.js (v16 or higher recommended)
+- npm or pnpm
+- Angular CLI
+
+### Setup
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Baptist01/S8-FE.git
+cd S8-FE
+```
+Install dependencies:
+```bash
+npm install
+```
+## Development
+
+Start the development server:
+```bash
+npm start
+```
+
+The application will be available at:
+```bash
+http://localhost:4200
+```
+## Testing
+
+To run end-to-end tests:
+```bash
+npm run test
+```
+
+Follow the Cypress prompts to execute the test suites.
+
+## Docker
+
+To build and run the application using Docker:
+```bash
+docker build -t s8-fe .
+docker run -p 4200:80 s8-fe
+```
+## Project Structure
+```text
+├── src/
+│   ├── app/
+│   ├── assets/
+│   ├── environments/
+│   └── styles/
+├── cypress/
+├── docker/
+├── angular.json
+├── package.json
+└── README.md
+```
+
+# License
+
+Licenced under the MIT licence.
